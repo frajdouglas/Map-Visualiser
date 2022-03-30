@@ -1,0 +1,18 @@
+.app {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  display: flex;
+}
+
+.sideBar {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 15vw;
+  max-height: 100vh;
+  border-bottom: 5px solid #4b3e91;
+  border-top: 5px solid #4b3e91;
+}

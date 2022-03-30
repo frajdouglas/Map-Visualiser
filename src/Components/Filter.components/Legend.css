@@ -1,0 +1,35 @@
+.legend {
+  position: absolute;
+  top: 1vh;
+  right: 0.1vw;
+  height: 30vh;
+  width: 25vh;
+  border: 5px solid #00dec6;
+  border-radius: 25px;
+}
+
+.legendTitle {
+  display: flex;
+  justify-content: center;
+  font-family: "Monaco", "Monaco", monospace;
+  font-weight: bold;
+  color: #00dec6;
+  padding: 10px;
+}
+
+.legendRow {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.legendValue {
+  display: flex;
+  justify-content: center;
+  padding-left: 10px;
+  height: 10px;
+  width: 100px;
+  font-family: "Monaco", "Monaco", monospace;
+  color: #00dec6;
+
+}
