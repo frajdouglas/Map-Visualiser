@@ -2,7 +2,7 @@
   position: absolute;
   top: 1vh;
   right: 0.1vw;
-  height: 30vh;
+  height: 25vh;
   width: 25vh;
   border: 5px solid #00dec6;
   border-radius: 25px;
@@ -21,15 +21,20 @@
   display: flex;
   justify-content: center;
   gap: 20px;
+  border: 1px solid #00dec6;
+
 }
 
 .legendValue {
   display: flex;
   justify-content: center;
+  align-items: center;
   padding-left: 10px;
-  height: 10px;
+  height: 100%;
   width: 100px;
   font-family: "Monaco", "Monaco", monospace;
   color: #00dec6;
+  border: 1px solid #00dec6;
+
 
 }

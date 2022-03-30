@@ -9,20 +9,35 @@ export const joinAPIData = (
   year2,
   scenario2
 ) => {
-  let paintPropertiesArray = [
+  let paintPropertiesArrayRedToGreen = [
     "interpolate",
     ["linear"],
     ["feature-state", "metric"],
     1,
-    "#fcde9c",
+    "#FF1010",
     2,
-    "#faa476",
+    "#FE7408",
     3,
-    "#e34f6f",
+    "#FDD900",
     4,
-    "#b9257a",
+    "#A4CF01",
     5,
-    "#7c1d6f",
+    "#4CC602",
+  ];
+  let paintPropertiesArrayGreenToRed = [
+    "interpolate",
+    ["linear"],
+    ["feature-state", "metric"],
+    1,
+    "#4CC602",
+    2,
+    "#A4CF01",
+    3,
+    "#FDD900",
+    4,
+    "#FE7408",
+    5,
+    "#FF1010",
   ];
   if (metric === "total_flow" && timePeriod2) {
     return mapState.setPaintProperty("id", "line-color", [
@@ -50,25 +65,21 @@ export const joinAPIData = (
     ]);
   } else if (metric === "total_flow") {
 
-    paintPropertiesArray[3] = 0
-    paintPropertiesArray[5] = 900
-    paintPropertiesArray[7] = 2800
-    paintPropertiesArray[9] = 6400
-    paintPropertiesArray[11] = 16000
+    paintPropertiesArrayGreenToRed[3] = 0
+    paintPropertiesArrayGreenToRed[5] = 900
+    paintPropertiesArrayGreenToRed[7] = 2800
+    paintPropertiesArrayGreenToRed[9] = 6400
+    paintPropertiesArrayGreenToRed[11] = 16000
 
-    return mapState.setPaintProperty("id", "line-color", paintPropertiesArray);
+    return mapState.setPaintProperty("id", "line-color", paintPropertiesArrayGreenToRed);
   } else if (metric === "netspd_kph") {
-    return mapState.setPaintProperty("id", "line-color", [
-      "interpolate",
-      ["linear"],
-      ["feature-state", "metric"],
-      0,
-      "#FF160C",
-      50,
-      "#FFFF00",
-      100,
-      "#39FF14",
-    ]);
+
+    paintPropertiesArrayRedToGreen[3] = 0
+    paintPropertiesArrayRedToGreen[5] = 30
+    paintPropertiesArrayRedToGreen[7] = 55
+    paintPropertiesArrayRedToGreen[9] = 82
+    paintPropertiesArrayRedToGreen[11] = 113
+    return mapState.setPaintProperty("id", "line-color", paintPropertiesArrayRedToGreen);
   } else if (metric === "car_eb") {
     return mapState.setPaintProperty("id", "line-color", [
       "interpolate",

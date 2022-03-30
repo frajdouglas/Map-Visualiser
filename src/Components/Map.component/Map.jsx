@@ -1,15 +1,10 @@
 import { useState, useRef, useEffect } from "react";
 import ReactDOM from "react-dom";
-import mapboxgl from "mapbox-gl";
-import "mapbox-gl/dist/mapbox-gl.css";
 import maplibregl from 'maplibre-gl';
 import "maplibre-gl/dist/maplibre-gl.css";
 
-
 import Popup from "../Popup.component/Popup";
 import { joinAPIData } from "../../Utils/mapUtils.js";
-
-// mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
 
 const Map = ({
   apiData,

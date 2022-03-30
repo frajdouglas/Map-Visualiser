@@ -3,26 +3,25 @@ import "./Legend.css";
 
 const Legend = ({ submittedFilterDefinition }) => {
     let styleBox1 = {
-    backgroundColor: "#fcde9c",
+    backgroundColor: "#FF1010",
     padding: "15px",
   };
   let styleBox2 = {
-    backgroundColor: "#faa476",
+    backgroundColor: "#FE7408",
     padding: "15px",
   };
   let styleBox3 = {
-    backgroundColor: "#e34f6f",
+    backgroundColor: "#FDD900",
     padding: "15px",
   };
   let styleBox4 = {
-    backgroundColor: "#b9257a",
+    backgroundColor: "#A4CF01",
     padding: "15px",
   };
   let styleBox5 = {
-    backgroundColor: "#7c1d6f",
+    backgroundColor: "#4CC602",
     padding: "15px",
   };
-
   if (submittedFilterDefinition.metric === "total_flow") {
     return (
       <div className="legend">
@@ -55,11 +54,11 @@ const Legend = ({ submittedFilterDefinition }) => {
         <div className="legendTitle">Net Speed (kph)</div>
         <div className="legendRow">
           <div className="legendValue">0-30</div>
-          <div style={styleBox1}></div>
+          <div style={styleBox5}></div>
         </div>
         <div className="legendRow">
           <div className="legendValue">30-55</div>
-          <div style={styleBox2}></div>
+          <div style={styleBox4}></div>
         </div>
         <div className="legendRow">
           <div className="legendValue">55-82</div>
@@ -67,11 +66,11 @@ const Legend = ({ submittedFilterDefinition }) => {
         </div>
         <div className="legendRow">
           <div className="legendValue">82-113</div>
-          <div style={styleBox4}></div>
+          <div style={styleBox2}></div>
         </div>
         <div className="legendRow">
           <div className="legendValue">113-999</div>
-          <div style={styleBox5}></div>
+          <div style={styleBox1}></div>
         </div>
       </div>
     );
