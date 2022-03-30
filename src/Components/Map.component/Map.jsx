@@ -38,7 +38,9 @@ const Map = ({
     console.log("MapState is :", mapState);
     const map = new maplibregl.Map({
       container: mapContainer.current,
-      style: "http://localhost:5000/tileserver/style.json",
+      style: "http://localhost:5000/tileserver/style_dark",
+      // style: "https://api.os.uk/maps/vector/v1/vts?key=loCPaE9h9T3ZflTrKUqQfDyQCJBabErh",
+      // style: "https://api.os.uk/maps/vector/v1/vts/resources/styles?srs=27700&key=loCPaE9h9T3ZflTrKUqQfDyQCJBabErh",
       center: [-1.826, 54.306],
       zoom: 7,
     });
@@ -58,7 +60,7 @@ const Map = ({
         ],
         promoteId: "id",
       });
-      
+
       console.log("MapState is :", mapState);
       setMap(map);
     });
@@ -86,6 +88,7 @@ const Map = ({
           "line-width": 2
         },
       });
+     
     }
   }, [mapState, year]);
 
