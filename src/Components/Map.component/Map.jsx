@@ -2,10 +2,14 @@ import { useState, useRef, useEffect } from "react";
 import ReactDOM from "react-dom";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
+import maplibregl from 'maplibre-gl';
+import "maplibre-gl/dist/maplibre-gl.css";
+
+
 import Popup from "../Popup.component/Popup";
 import { joinAPIData } from "../../Utils/mapUtils.js";
 
-mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
+// mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
 
 const Map = ({
   apiData,
@@ -15,13 +19,13 @@ const Map = ({
 }) => {
   let { timePeriod, metric, year, scenario, timePeriod2, year2, scenario2 } =
     submittedFilterDefinition;
-  const popUpRef = useRef(new mapboxgl.Popup({ offset: 20 }));
+  const popUpRef = useRef(new maplibregl.Popup({ offset: 20 }));
   const [mapState, setMap] = useState(null);
   const mapContainer = useRef(null);
   // Add vector layer lookup into here once uploaded and try switching between years.
   let sourceLayerLookup = {
-    2018: "refCase_2018_network-a0j51t",
-    2050: "refCase_2050_network-305e5n",
+    2018: "refCase_2018_network_offset_30",
+    2050: "refCase_2050_network_offset_30_new",
   };
 
   console.log("MAP COMPONENT RENDERED, MapState is :", mapState);
@@ -32,25 +36,29 @@ const Map = ({
   // We add all the required sources here and add a dummy "id" layer to instantly removed in next useEffect and replace with the required layer.
   useEffect(() => {
     console.log("MapState is :", mapState);
-    const map = new mapboxgl.Map({
+    const map = new maplibregl.Map({
       container: mapContainer.current,
-      style: "mapbox://styles/mapbox/dark-v10",
+      style: "http://localhost:5000/tileserver/style.json",
       center: [-1.826, 54.306],
       zoom: 7,
     });
     map.on("load", () => {
-      map.addControl(new mapboxgl.FullscreenControl(), "bottom-right");
+      map.addControl(new maplibregl.FullscreenControl(), "bottom-right");
       map.addSource("2018", {
         type: "vector",
-        url: "mapbox://frajondouglas99.a9mdorng",
+        tiles: [
+          "http://localhost:5000/tileserver/noham_network_2018_tiles/tiles/{z}/{x}/{y}.pbf",
+        ],
         promoteId: "id",
       });
       map.addSource("2050", {
         type: "vector",
-        url: "mapbox://frajondouglas99.b5fdvvvw",
+        tiles: [
+          "http://localhost:5000/tileserver/noham_network_2050_tiles/tiles/{z}/{x}/{y}.pbf",
+        ],
         promoteId: "id",
       });
-
+      
       console.log("MapState is :", mapState);
       setMap(map);
     });
