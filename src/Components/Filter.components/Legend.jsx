@@ -2,7 +2,7 @@ import React from "react";
 import "./Legend.css";
 
 const Legend = ({ submittedFilterDefinition }) => {
-    let styleBox1 = {
+  let styleBox1 = {
     backgroundColor: "#4CC602",
     padding: "15px",
   };
@@ -22,7 +22,74 @@ const Legend = ({ submittedFilterDefinition }) => {
     backgroundColor: "#FF1010",
     padding: "15px",
   };
-  if (submittedFilterDefinition.metric === "total_flow") {
+
+  let styleBoxGrey = {
+    backgroundColor: "#f0f5f1",
+    padding: "15px",
+  };
+  if (
+    submittedFilterDefinition.metric === "netspd_kph" &&
+    submittedFilterDefinition.timePeriod2
+  ) {
+    return (
+      <div className="legend">
+        <div className="legendTitle">Net Speed Difference (kph)</div>
+        <div className="legendRow">
+          <div className="legendValue">-20</div>
+          <div style={styleBox1}></div>
+        </div>
+        <div className="legendRow">
+          <div className="legendValue">-10</div>
+          <div style={styleBox2}></div>
+        </div>
+        <div className="legendRow">
+          <div className="legendValue">0</div>
+          <div
+            style={styleBoxGrey}
+          ></div>
+        </div>
+        <div className="legendRow">
+          <div className="legendValue">10</div>
+          <div style={styleBox4}></div>
+        </div>
+        <div className="legendRow">
+          <div className="legendValue">20</div>
+          <div style={styleBox5}></div>
+        </div>
+      </div>
+    );
+  } else if (
+    submittedFilterDefinition.metric !== "netspd_kph" &&
+    submittedFilterDefinition.timePeriod2
+  ) {
+    return (
+      <div className="legend">
+        <div className="legendTitle">
+          {submittedFilterDefinition.metric} Difference{" "}
+        </div>
+        <div className="legendRow">
+          <div className="legendValue">-1000</div>
+          <div style={styleBox1}></div>
+        </div>
+        <div className="legendRow">
+          <div className="legendValue">-500</div>
+          <div style={styleBox2}></div>
+        </div>
+        <div className="legendRow">
+          <div className="legendValue">0</div>
+          <div style={styleBoxGrey}></div>
+        </div>
+        <div className="legendRow">
+          <div className="legendValue">500</div>
+          <div style={styleBox4}></div>
+        </div>
+        <div className="legendRow">
+          <div className="legendValue">1000</div>
+          <div style={styleBox5}></div>
+        </div>
+      </div>
+    );
+  } else if (submittedFilterDefinition.metric === "total_flow") {
     return (
       <div className="legend">
         <div className="legendTitle">Total Flow</div>

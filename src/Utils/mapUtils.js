@@ -63,39 +63,42 @@ export const colourNetwork = (
     5,
     "#FF1010",
   ];
-  if (metric === "total_flow" && timePeriod2) {
-    return mapState.setPaintProperty("id", "line-color", [
-      "interpolate",
-      ["linear"],
-      ["feature-state", "metric"],
-      -500,
-      "#FF160C",
-      0,
-      "#FFFF00",
-      500,
-      "#39FF14",
-    ]);
-  } else if (metric === "netspd_kph" && timePeriod2) {
-    paintPropertiesArrayRedToGreen[3] = -20;
-    paintPropertiesArrayRedToGreen[5] = -10;
-    paintPropertiesArrayRedToGreen[7] = 0;
-    paintPropertiesArrayRedToGreen[9] = 10;
-    paintPropertiesArrayRedToGreen[11] = 20;
+  let paintPropertiesArrayRedToGreyToGreen = [
+    "interpolate",
+    ["linear"],
+    ["feature-state", "metric"],
+    1,
+    "#FF1010",
+    2,
+    "#FE7408",
+    3,
+    "#f0f5f1",
+    4,
+    "#A4CF01",
+    5,
+    "#4CC602",
+  ];
+ if (metric === "netspd_kph" && timePeriod2) {
+  paintPropertiesArrayRedToGreyToGreen[3] = -20;
+  paintPropertiesArrayRedToGreyToGreen[5] = -10;
+  paintPropertiesArrayRedToGreyToGreen[7] = 0;
+  paintPropertiesArrayRedToGreyToGreen[9] = 10;
+  paintPropertiesArrayRedToGreyToGreen[11] = 20;
     return mapState.setPaintProperty(
       "id",
       "line-color",
-      paintPropertiesArrayRedToGreen
+      paintPropertiesArrayRedToGreyToGreen
     );
   } else if (metric !== "netspd_kph" && timePeriod2) {
-    paintPropertiesArrayRedToGreen[3] = -1000;
-    paintPropertiesArrayRedToGreen[5] = -500;
-    paintPropertiesArrayRedToGreen[7] = 0;
-    paintPropertiesArrayRedToGreen[9] = 500;
-    paintPropertiesArrayRedToGreen[11] = 1000;
+    paintPropertiesArrayRedToGreyToGreen[3] = -1000;
+    paintPropertiesArrayRedToGreyToGreen[5] = -500;
+    paintPropertiesArrayRedToGreyToGreen[7] = 0;
+    paintPropertiesArrayRedToGreyToGreen[9] = 500;
+    paintPropertiesArrayRedToGreyToGreen[11] = 1000;
     return mapState.setPaintProperty(
       "id",
       "line-color",
-      paintPropertiesArrayRedToGreen
+      paintPropertiesArrayRedToGreyToGreen
     );
   } else if (metric === "total_flow") {
     paintPropertiesArrayGreenToRed[3] = 0;
