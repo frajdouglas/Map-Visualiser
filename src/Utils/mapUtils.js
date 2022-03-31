@@ -1,5 +1,29 @@
-// A method of setting symbology based on inputs.
-export const joinAPIData = (
+// import { Jenks } from "jenks";
+// // import { getData } from "./api.js";
+// export const jenksClassification = (apiData) => {
+//   // let timePeriod = "am"
+//   // let metric = "total_flow"
+//   // let year =  "2018"
+//   // let scenario =  ""
+//   // getData(
+//   //   timePeriod,
+//   //   metric,
+//   //   year,
+//   //   scenario
+//   // ).then((dataFromApi) => {
+//   //   console.log(dataFromApi.data)
+//     let n_classes = 5;
+//   let result = new Jenks(apiData, n_classes).naturalBreak();
+//   console.log(result);
+//   // });
+//   // let n_classes = 5;
+//   // let result = new Jenks(apiData, n_classes).naturalBreak();
+//   // console.log(result);
+//   // return result;
+// };
+
+
+export const colourNetwork = (
   mapState,
   timePeriod,
   metric,
@@ -52,106 +76,116 @@ export const joinAPIData = (
       "#39FF14",
     ]);
   } else if (metric === "netspd_kph" && timePeriod2) {
-    return mapState.setPaintProperty("id", "line-color", [
-      "interpolate",
-      ["linear"],
-      ["feature-state", "metric"],
-      -10,
-      "#FF160C",
-      0,
-      "#FFFF00",
-      10,
-      "#39FF14",
-    ]);
+    paintPropertiesArrayRedToGreen[3] = -20;
+    paintPropertiesArrayRedToGreen[5] = -10;
+    paintPropertiesArrayRedToGreen[7] = 0;
+    paintPropertiesArrayRedToGreen[9] = 10;
+    paintPropertiesArrayRedToGreen[11] = 20;
+    return mapState.setPaintProperty(
+      "id",
+      "line-color",
+      paintPropertiesArrayRedToGreen
+    );
+  } else if (metric !== "netspd_kph" && timePeriod2) {
+    paintPropertiesArrayRedToGreen[3] = -1000;
+    paintPropertiesArrayRedToGreen[5] = -500;
+    paintPropertiesArrayRedToGreen[7] = 0;
+    paintPropertiesArrayRedToGreen[9] = 500;
+    paintPropertiesArrayRedToGreen[11] = 1000;
+    return mapState.setPaintProperty(
+      "id",
+      "line-color",
+      paintPropertiesArrayRedToGreen
+    );
   } else if (metric === "total_flow") {
+    paintPropertiesArrayGreenToRed[3] = 0;
+    paintPropertiesArrayGreenToRed[5] = 900;
+    paintPropertiesArrayGreenToRed[7] = 2800;
+    paintPropertiesArrayGreenToRed[9] = 6400;
+    paintPropertiesArrayGreenToRed[11] = 16000;
 
-    paintPropertiesArrayGreenToRed[3] = 0
-    paintPropertiesArrayGreenToRed[5] = 900
-    paintPropertiesArrayGreenToRed[7] = 2800
-    paintPropertiesArrayGreenToRed[9] = 6400
-    paintPropertiesArrayGreenToRed[11] = 16000
-
-    return mapState.setPaintProperty("id", "line-color", paintPropertiesArrayGreenToRed);
+    return mapState.setPaintProperty(
+      "id",
+      "line-color",
+      paintPropertiesArrayGreenToRed
+    );
   } else if (metric === "netspd_kph") {
-
-    paintPropertiesArrayRedToGreen[3] = 0
-    paintPropertiesArrayRedToGreen[5] = 30
-    paintPropertiesArrayRedToGreen[7] = 55
-    paintPropertiesArrayRedToGreen[9] = 82
-    paintPropertiesArrayRedToGreen[11] = 113
-    return mapState.setPaintProperty("id", "line-color", paintPropertiesArrayRedToGreen);
+    paintPropertiesArrayRedToGreen[3] = 0;
+    paintPropertiesArrayRedToGreen[5] = 30;
+    paintPropertiesArrayRedToGreen[7] = 55;
+    paintPropertiesArrayRedToGreen[9] = 82;
+    paintPropertiesArrayRedToGreen[11] = 113;
+    return mapState.setPaintProperty(
+      "id",
+      "line-color",
+      paintPropertiesArrayRedToGreen
+    );
   } else if (metric === "car_eb") {
-    return mapState.setPaintProperty("id", "line-color", [
-      "interpolate",
-      ["linear"],
-      ["feature-state", "metric"],
-      0,
-      "#39FF14",
-      2500,
-      "#FFFF00",
-      5000,
-      "#FF160C",
-    ]);
+    paintPropertiesArrayGreenToRed[3] = 0;
+    paintPropertiesArrayGreenToRed[5] = 250;
+    paintPropertiesArrayGreenToRed[7] = 760;
+    paintPropertiesArrayGreenToRed[9] = 1600;
+    paintPropertiesArrayGreenToRed[11] = 3000;
+    return mapState.setPaintProperty(
+      "id",
+      "line-color",
+      paintPropertiesArrayGreenToRed
+    );
   } else if (metric === "car_comm") {
-    return mapState.setPaintProperty("id", "line-color", [
-      "interpolate",
-      ["linear"],
-      ["feature-state", "metric"],
-      0,
-      "#39FF14",
-      5000,
-      "#FFFF00",
-      10000,
-      "#FF160C",
-    ]);
+    paintPropertiesArrayGreenToRed[3] = 0;
+    paintPropertiesArrayGreenToRed[5] = 600;
+    paintPropertiesArrayGreenToRed[7] = 2000;
+    paintPropertiesArrayGreenToRed[9] = 4580;
+    paintPropertiesArrayGreenToRed[11] = 12000;
+    return mapState.setPaintProperty(
+      "id",
+      "line-color",
+      paintPropertiesArrayGreenToRed
+    );
   } else if (metric === "car_other") {
-    return mapState.setPaintProperty("id", "line-color", [
-      "interpolate",
-      ["linear"],
-      ["feature-state", "metric"],
-      0,
-      "#39FF14",
-      4000,
-      "#FFFF00",
-      7000,
-      "#FF160C",
-    ]);
+    paintPropertiesArrayGreenToRed[3] = 0;
+    paintPropertiesArrayGreenToRed[5] = 500;
+    paintPropertiesArrayGreenToRed[7] = 1600;
+    paintPropertiesArrayGreenToRed[9] = 4400;
+    paintPropertiesArrayGreenToRed[11] = 10500;
+    return mapState.setPaintProperty(
+      "id",
+      "line-color",
+      paintPropertiesArrayGreenToRed
+    );
   } else if (metric === "lgv_flow") {
-    return mapState.setPaintProperty("id", "line-color", [
-      "interpolate",
-      ["linear"],
-      ["feature-state", "metric"],
-      0,
-      "#39FF14",
-      300,
-      "#FFFF00",
-      700,
-      "#FF160C",
-    ]);
+    paintPropertiesArrayGreenToRed[3] = 0;
+    paintPropertiesArrayGreenToRed[5] = 70;
+    paintPropertiesArrayGreenToRed[7] = 210;
+    paintPropertiesArrayGreenToRed[9] = 480;
+    paintPropertiesArrayGreenToRed[11] = 900;
+    return mapState.setPaintProperty(
+      "id",
+      "line-color",
+      paintPropertiesArrayGreenToRed
+    );
   } else if (metric === "hgv_flow") {
-    return mapState.setPaintProperty("id", "line-color", [
-      "interpolate",
-      ["linear"],
-      ["feature-state", "metric"],
-      0,
-      "#39FF14",
-      500,
-      "#FFFF00",
-      3000,
-      "#FF160C",
-    ]);
+    paintPropertiesArrayGreenToRed[3] = 0;
+    paintPropertiesArrayGreenToRed[5] = 125;
+    paintPropertiesArrayGreenToRed[7] = 415;
+    paintPropertiesArrayGreenToRed[9] = 950;
+    paintPropertiesArrayGreenToRed[11] = 1800;
+    return mapState.setPaintProperty(
+      "id",
+      "line-color",
+      paintPropertiesArrayGreenToRed
+    );
   } else if (metric === "link_voc") {
-    return mapState.setPaintProperty("id", "line-color", [
-      "interpolate",
-      ["linear"],
-      ["feature-state", "metric"],
-      0,
-      "#39FF14",
-      50,
-      "#FFFF00",
-      150,
-      "#FF160C",
-    ]);
+    paintPropertiesArrayGreenToRed[3] = 0;
+    paintPropertiesArrayGreenToRed[5] = 13;
+    paintPropertiesArrayGreenToRed[7] = 35;
+    paintPropertiesArrayGreenToRed[9] = 58;
+    paintPropertiesArrayGreenToRed[11] = 86;
+    return mapState.setPaintProperty(
+      "id",
+      "line-color",
+      paintPropertiesArrayGreenToRed
+    );
   } else {
     console.log("NOTHING TRIGGERED");
   }

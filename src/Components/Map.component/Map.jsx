@@ -2,9 +2,8 @@ import { useState, useRef, useEffect } from "react";
 import ReactDOM from "react-dom";
 import maplibregl from 'maplibre-gl';
 import "maplibre-gl/dist/maplibre-gl.css";
-
 import Popup from "../Popup.component/Popup";
-import { joinAPIData } from "../../Utils/mapUtils.js";
+import { colourNetwork } from "../../Utils/mapUtils.js";
 
 const Map = ({
   apiData,
@@ -103,7 +102,7 @@ const Map = ({
           }
         );
       });
-      joinAPIData(
+      colourNetwork(
         mapState,
         timePeriod,
         metric,

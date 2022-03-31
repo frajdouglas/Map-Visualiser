@@ -26,7 +26,7 @@ const SingleScenario = () => {
   });
   const [apiData, setApiData] = useState([{ id: 41969, total_flow: 100 }]);
   const [loading, setLoading] = useState(false);
-
+  const [classification,setClassification] = useState(1,2,3,4,5)
   const [panLocation, setPanLocation] = useState("");
 
   const zoomToLookup = {
