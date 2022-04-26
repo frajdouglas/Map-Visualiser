@@ -1,25 +1,52 @@
 import React from "react";
 import "./Legend.css";
 
-const Legend = ({ submittedFilterDefinition }) => {
+const Legend = ({ submittedFilterDefinition, paintProperty }) => {
+
+  console.log(paintProperty)
   let styleBox1 = {
-    backgroundColor: "#4CC602",
+    backgroundColor: "#f7f4f9",
     padding: "15px",
   };
   let styleBox2 = {
-    backgroundColor: "#A4CF01",
+    backgroundColor: "#e7e1ef",
     padding: "15px",
   };
   let styleBox3 = {
-    backgroundColor: "#FDD900",
+    backgroundColor: "#d4b9da",
     padding: "15px",
   };
   let styleBox4 = {
-    backgroundColor: "#FE7408",
+    backgroundColor: "#c994c7",
     padding: "15px",
   };
   let styleBox5 = {
-    backgroundColor: "#FF1010",
+    backgroundColor: "#df65b0",
+    padding: "15px",
+  };
+
+  let styleBox6 = {
+    backgroundColor: "#e7298a",
+    padding: "15px",
+  };
+
+  let styleBox7 = {
+    backgroundColor: "#ce1256",
+    padding: "15px",
+  };
+
+  let styleBox8 = {
+    backgroundColor: "#980043",
+    padding: "15px",
+  };
+
+  let styleBox9 = {
+    backgroundColor: "#67001f",
+    padding: "15px",
+  };
+
+  let styleBox10 = {
+    backgroundColor: "#1b0008",
     padding: "15px",
   };
 
@@ -94,24 +121,44 @@ const Legend = ({ submittedFilterDefinition }) => {
       <div className="legend">
         <div className="legendTitle">Total Flow</div>
         <div className="legendRow">
-          <div className="legendValue">0-900</div>
+          <div className="legendValue">0-365</div>
           <div style={styleBox1}></div>
         </div>
         <div className="legendRow">
-          <div className="legendValue">900-2800</div>
+          <div className="legendValue">365-935</div>
           <div style={styleBox2}></div>
         </div>
         <div className="legendRow">
-          <div className="legendValue">2800-6400</div>
+          <div className="legendValue">935-1810</div>
           <div style={styleBox3}></div>
         </div>
         <div className="legendRow">
-          <div className="legendValue">6400-16000</div>
+          <div className="legendValue">1810-3100</div>
           <div style={styleBox4}></div>
         </div>
         <div className="legendRow">
-          <div className="legendValue">16000-30500</div>
+          <div className="legendValue">3100-4715</div>
           <div style={styleBox5}></div>
+        </div>
+        <div className="legendRow">
+          <div className="legendValue">4715-6950</div>
+          <div style={styleBox6}></div>
+        </div>
+        <div className="legendRow">
+          <div className="legendValue">6950-10275</div>
+          <div style={styleBox7}></div>
+        </div>
+        <div className="legendRow">
+          <div className="legendValue">10275-15345</div>
+          <div style={styleBox8}></div>
+        </div>
+        <div className="legendRow">
+          <div className="legendValue">15345-21385</div>
+          <div style={styleBox9}></div>
+        </div>
+        <div className="legendRow">
+          <div className="legendValue">21385-31045</div>
+          <div style={styleBox10}></div>
         </div>
       </div>
     );
@@ -120,24 +167,44 @@ const Legend = ({ submittedFilterDefinition }) => {
       <div className="legend">
         <div className="legendTitle">Net Speed (kph)</div>
         <div className="legendRow">
-          <div className="legendValue">0-30</div>
-          <div style={styleBox5}></div>
+          <div className="legendValue">0-15</div>
+          <div style={styleBox1}></div>
         </div>
         <div className="legendRow">
-          <div className="legendValue">30-55</div>
-          <div style={styleBox4}></div>
-        </div>
-        <div className="legendRow">
-          <div className="legendValue">55-82</div>
-          <div style={styleBox3}></div>
-        </div>
-        <div className="legendRow">
-          <div className="legendValue">82-113</div>
+          <div className="legendValue">15-26</div>
           <div style={styleBox2}></div>
         </div>
         <div className="legendRow">
-          <div className="legendValue">113-999</div>
-          <div style={styleBox1}></div>
+          <div className="legendValue">26-37</div>
+          <div style={styleBox3}></div>
+        </div>
+        <div className="legendRow">
+          <div className="legendValue">37-46</div>
+          <div style={styleBox4}></div>
+        </div>
+        <div className="legendRow">
+          <div className="legendValue">46-57</div>
+          <div style={styleBox5}></div>
+        </div>
+        <div className="legendRow">
+          <div className="legendValue">57-70</div>
+          <div style={styleBox6}></div>
+        </div>
+        <div className="legendRow">
+          <div className="legendValue">70-84</div>
+          <div style={styleBox7}></div>
+        </div>
+        <div className="legendRow">
+          <div className="legendValue">84-99</div>
+          <div style={styleBox8}></div>
+        </div>
+        <div className="legendRow">
+          <div className="legendValue">99-115</div>
+          <div style={styleBox9}></div>
+        </div>
+        <div className="legendRow">
+          <div className="legendValue">115+</div>
+          <div style={styleBox10}></div>
         </div>
       </div>
     );

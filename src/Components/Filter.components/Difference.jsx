@@ -9,23 +9,26 @@ import MenuItem from "@mui/material/MenuItem";
 import { checkEquality } from "../../Utils/objectEqualityChecker";
 import { getDifference } from "../../Utils/api.js";
 import ReactLoading from "react-loading";
-import Legend from "./Legend";
 
 const Difference = () => {
   const [filterDefinition, setFilterDefinition] = useState({
+    model: "v1",
     timePeriod: "am",
     metric: "total_flow",
     year: "2018",
     scenario: "",
+    model2: "v1",
     timePeriod2: "pm",
     year2: "2018",
     scenario2: "",
   });
   const [submittedFilterDefinition, setSubmittedFilterDefinition] = useState({
+    model: "v1",
     timePeriod: "am",
     metric: "total_flow",
     year: "2018",
     scenario: "",
+    model2: "v1",
     timePeriod2: "pm",
     year2: "2018",
     scenario2: "",
@@ -41,22 +44,22 @@ const Difference = () => {
     M60: [-2.246, 53.473, 11],
   };
 
-  let { timePeriod, metric, year, scenario, timePeriod2, year2, scenario2 } =
+  let { model, timePeriod, metric, year, scenario, model2, timePeriod2, year2, scenario2 } =
     submittedFilterDefinition;
 
   const handleSubmit = () => {
     setSubmittedFilterDefinition(filterDefinition);
   };
-  console.log(filterDefinition);
 
   useEffect(() => {
-    console.log("api has been called");
     setLoading(true);
     getDifference(
+      model,
       timePeriod,
       metric,
       year,
       scenario,
+      model2,
       timePeriod2,
       year2,
       scenario2
@@ -68,6 +71,26 @@ const Difference = () => {
 
   return (
     <div className="filters">
+      <div className="dropdown">
+        <FormControl style={{ width: 250 }}>
+          <InputLabel id="model-filter-select-label">Model Run</InputLabel>
+          <Select
+            labelId="model-filter-dropdown"
+            id="model-filter-dropdown"
+            value={filterDefinition.model}
+            label="model"
+            onChange={(event) => {
+              let copyFilterDefinition = { ...filterDefinition };
+              copyFilterDefinition.model = event.target.value;
+              setFilterDefinition(copyFilterDefinition);
+            }}
+            autoWidth
+          >
+            <MenuItem value={"v1"}>v1</MenuItem>
+            <MenuItem value={"v2"}>v2</MenuItem>
+          </Select>
+        </FormControl>
+      </div>
       <div className="dropdown">
         <FormControl style={{ width: 250 }}>
           <InputLabel id="year-filter-select-label">Year</InputLabel>
@@ -82,7 +105,7 @@ const Difference = () => {
               if (copyFilterDefinition.year === "2018") {
                 copyFilterDefinition.scenario = "";
               } else if (copyFilterDefinition.scenario === "") {
-                copyFilterDefinition.scenario = "uzc";
+                copyFilterDefinition.scenario = "sc04_uzc";
               }
               setFilterDefinition(copyFilterDefinition);
             }}
@@ -158,15 +181,35 @@ const Difference = () => {
               }}
               autoWidth
             >
-              <MenuItem value={"dd"}>Digitally Distributed</MenuItem>
-              <MenuItem value={"jam"}>Just About Managing</MenuItem>
-              <MenuItem value={"pp"}>Prioritised Places</MenuItem>
-              <MenuItem value={"uzc"}>Urban Zero Carbon</MenuItem>
+              <MenuItem value={"sc03_dd"}>Digitally Distributed</MenuItem>
+              <MenuItem value={"sc01_jam"}>Just About Managing</MenuItem>
+              <MenuItem value={"sc02_pp"}>Prioritised Places</MenuItem>
+              <MenuItem value={"sc04_uzc"}>Urban Zero Carbon</MenuItem>
             </Select>
           </FormControl>
         </div>
       )}
-            <div className="dropdown">
+      <div className="dropdown">
+        <FormControl style={{ width: 250 }}>
+          <InputLabel id="model2-filter-select-label">Comparison Model Run</InputLabel>
+          <Select
+            labelId="model2-filter-dropdown"
+            id="model2-filter-dropdown"
+            value={filterDefinition.model2}
+            label="model2"
+            onChange={(event) => {
+              let copyFilterDefinition = { ...filterDefinition };
+              copyFilterDefinition.model2 = event.target.value;
+              setFilterDefinition(copyFilterDefinition);
+            }}
+            autoWidth
+          >
+            <MenuItem value={"v1"}>v1</MenuItem>
+            <MenuItem value={"v2"}>v2</MenuItem>
+          </Select>
+        </FormControl>
+      </div>
+      <div className="dropdown">
         <FormControl style={{ width: 250 }}>
           <InputLabel id="year2-filter-select-label">
             Comparison Year
@@ -182,7 +225,7 @@ const Difference = () => {
               if (copyFilterDefinition.year2 === "2018") {
                 copyFilterDefinition.scenario2 = "";
               } else if (copyFilterDefinition.scenario2 === "") {
-                copyFilterDefinition.scenario2 = "uzc";
+                copyFilterDefinition.scenario2 = "sc04_uzc";
               }
               setFilterDefinition(copyFilterDefinition);
             }}
@@ -234,10 +277,10 @@ const Difference = () => {
               }}
               autoWidth
             >
-              <MenuItem value={"dd"}>Digitally Distributed</MenuItem>
-              <MenuItem value={"jam"}>Just About Managing</MenuItem>
-              <MenuItem value={"pp"}>Prioritised Places</MenuItem>
-              <MenuItem value={"uzc"}>Urban Zero Carbon</MenuItem>
+              <MenuItem value={"sc03_dd"}>Digitally Distributed</MenuItem>
+              <MenuItem value={"sc01_jam"}>Just About Managing</MenuItem>
+              <MenuItem value={"sc02_pp"}>Prioritised Places</MenuItem>
+              <MenuItem value={"sc04_uzc"}>Urban Zero Carbon</MenuItem>
             </Select>
           </FormControl>
         </div>
@@ -247,7 +290,7 @@ const Difference = () => {
       ) : (
         <Button
           variant="contained"
-          className="submitButton"
+          className="submit"
           onClick={handleSubmit}
         >
           Submit
@@ -255,7 +298,12 @@ const Difference = () => {
       )}
       {loading === true && (
         <div className="loading">
-          <ReactLoading type={"spin"} color={"#00dec6"} height={50} width={50} />{" "}
+          <ReactLoading
+            type={"spin"}
+            color={"#00dec6"}
+            height={50}
+            width={50}
+          />{" "}
         </div>
       )}
       <div className="dropdown">
@@ -284,7 +332,6 @@ const Difference = () => {
           zoomToLookup={zoomToLookup}
         />
       </div>
-      <Legend submittedFilterDefinition={submittedFilterDefinition}/>
     </div>
   );
 };

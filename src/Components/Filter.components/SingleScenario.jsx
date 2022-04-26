@@ -7,28 +7,34 @@ import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { checkEquality } from "../../Utils/objectEqualityChecker";
-import { getData } from "../../Utils/api.js";
+import { getData, getTablesSummary } from "../../Utils/api.js";
 import ReactLoading from "react-loading";
-import Legend from "./Legend";
+import Legend from "../Map.component/Legend";
 
 const SingleScenario = () => {
   const [filterDefinition, setFilterDefinition] = useState({
+    model: "v1",
     timePeriod: "am",
     metric: "total_flow",
     year: "2018",
     scenario: "",
+    model: "v1"
   });
   const [submittedFilterDefinition, setSubmittedFilterDefinition] = useState({
+    model: "v1",
     timePeriod: "am",
     metric: "total_flow",
     year: "2018",
     scenario: "",
+    model: "v1"
   });
   const [apiData, setApiData] = useState([{ id: 41969, total_flow: 100 }]);
   const [loading, setLoading] = useState(false);
+  const [dropdownOptions, setDropdownOptions] = useState({
+    2050: [{ sc02: ["v1"], sc03: ["v1", "v2"] }]
+  })
   const [classification,setClassification] = useState(1,2,3,4,5)
   const [panLocation, setPanLocation] = useState("");
-
   const zoomToLookup = {
     TN: [-1.826, 54.306, 8],
     M60: [-2.246, 53.473, 11],
@@ -38,10 +44,16 @@ const SingleScenario = () => {
     setSubmittedFilterDefinition(filterDefinition);
   };
 
+useEffect(() => {
+  getTablesSummary().then((dataFromApi) => {
+    setDropdownOptions(dataFromApi.data)
+    });
+},[])
+console.log(dropdownOptions)
   useEffect(() => {
-    console.log("api has been called");
     setLoading(true);
     getData(
+      submittedFilterDefinition.model,
       submittedFilterDefinition.timePeriod,
       submittedFilterDefinition.metric,
       submittedFilterDefinition.year,
@@ -56,6 +68,26 @@ const SingleScenario = () => {
     <div className="filters">
       <div className="dropdown">
         <FormControl style={{ width: 250 }}>
+          <InputLabel id="model-filter-select-label">Model Run</InputLabel>
+          <Select
+            labelId="model-filter-dropdown"
+            id="model-filter-dropdown"
+            value={filterDefinition.model}
+            label="model"
+            onChange={(event) => {
+              let copyFilterDefinition = { ...filterDefinition };
+              copyFilterDefinition.model = event.target.value;
+              setFilterDefinition(copyFilterDefinition);
+            }}
+            autoWidth
+          >
+            <MenuItem value={"v1"}>v1</MenuItem>
+            <MenuItem value={"v2"}>v2</MenuItem>
+          </Select>
+        </FormControl>
+      </div>
+      <div className="dropdown">
+        <FormControl style={{ width: 250 }}>
           <InputLabel id="year-filter-select-label">Year</InputLabel>
           <Select
             labelId="year-filter-dropdown"
@@ -68,7 +100,7 @@ const SingleScenario = () => {
               if (copyFilterDefinition.year === "2018") {
                 copyFilterDefinition.scenario = "";
               } else if (copyFilterDefinition.scenario === "") {
-                copyFilterDefinition.scenario = "uzc";
+                copyFilterDefinition.scenario = "sc04_uzc";
               }
               setFilterDefinition(copyFilterDefinition);
             }}
@@ -144,23 +176,23 @@ const SingleScenario = () => {
               }}
               autoWidth
             >
-              <MenuItem value={"dd"}>Digitally Distributed</MenuItem>
-              <MenuItem value={"jam"}>Just About Managing</MenuItem>
-              <MenuItem value={"pp"}>Prioritised Places</MenuItem>
-              <MenuItem value={"uzc"}>Urban Zero Carbon</MenuItem>
+              <MenuItem value={"sc03_dd"}>Digitally Distributed</MenuItem>
+              <MenuItem value={"sc01_jam"}>Just About Managing</MenuItem>
+              <MenuItem value={"sc02_pp"}>Prioritised Places</MenuItem>
+              <MenuItem value={"sc04_uzc"}>Urban Zero Carbon</MenuItem>
             </Select>
           </FormControl>
         </div>
       )}
 
       {checkEquality(submittedFilterDefinition, filterDefinition) ? (
-        <Button className="submitButton" disabled>
+        <Button className="submit" disabled>
           Submit
         </Button>
       ) : (
         <Button
           variant="contained"
-          className="submitButton"
+          className="submit"
           onClick={handleSubmit}
         >
           Submit
@@ -198,7 +230,7 @@ const SingleScenario = () => {
           zoomToLookup={zoomToLookup}
         />
       </div>
-      <Legend submittedFilterDefinition={submittedFilterDefinition}/>
+      {/* <Legend submittedFilterDefinition={submittedFilterDefinition}/> */}
     </div>
   );
 };

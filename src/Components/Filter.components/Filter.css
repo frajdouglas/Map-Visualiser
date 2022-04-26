@@ -1,37 +1,37 @@
 .filters {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    height: 64vh;
-    width: 15vw;
-    padding-top: 35px;
-    padding-bottom: 20px;
-    overflow-y: scroll;
-    border-top: 5px solid #4b3e91;
-  }
-  
- 
-  .loading {
-    position: absolute;
-    left: 300px;
-    top: 18px;
-    z-index: 2;
-  }
-  
-  .map {
-    position: absolute;
-    top: 0vh;
-    left: 15vw;
-    z-index: 1;
-  }
-  
-  .legend {
-    position: absolute;
-    top: 0vh;
-    right: 0.1vw;
-    height: 50vh;
-    width: 20vw;
-    z-index: 1;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  height: 64vh;
+  width: 15vw;
+  padding-top: 35px;
+  padding-bottom: 20px;
+  overflow-y: scroll;
+  border-top: 5px solid #4b3e91;
+}
+
+
+.loading {
+  position: absolute;
+  left: 300px;
+  top: 18px;
+  z-index: 2;
+}
+
+.map {
+  position: absolute;
+  top: 0vh;
+  left: 15vw;
+  z-index: 1;
+}
+
+.legend {
+  position: absolute;
+  top: 0vh;
+  right: 0.1vw;
+  height: 50vh;
+  width: 20vw;
+  z-index: 1;
+}
