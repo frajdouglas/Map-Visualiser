@@ -17,23 +17,24 @@ const SingleScenario = () => {
     timePeriod: "am",
     metric: "total_flow",
     year: "2018",
-    scenario: "",
-    model: "v1"
+    scenario: "base",
+    model: "v1",
   });
   const [submittedFilterDefinition, setSubmittedFilterDefinition] = useState({
     model: "v1",
     timePeriod: "am",
     metric: "total_flow",
     year: "2018",
-    scenario: "",
-    model: "v1"
+    scenario: "base",
+    model: "v1",
   });
   const [apiData, setApiData] = useState([{ id: 41969, total_flow: 100 }]);
   const [loading, setLoading] = useState(false);
   const [dropdownOptions, setDropdownOptions] = useState({
-    2050: [{ sc02: ["v1"], sc03: ["v1", "v2"] }]
-  })
-  const [classification,setClassification] = useState(1,2,3,4,5)
+    2018: { base: ["v1"] },
+    2050: { sc01_jam: ["v1"], sc02_pp: ["v1"], sc03_dd: ["v1", "v2"] },
+  });
+  const [classification, setClassification] = useState(1, 2, 3, 4, 5);
   const [panLocation, setPanLocation] = useState("");
   const zoomToLookup = {
     TN: [-1.826, 54.306, 8],
@@ -44,12 +45,14 @@ const SingleScenario = () => {
     setSubmittedFilterDefinition(filterDefinition);
   };
 
-useEffect(() => {
-  getTablesSummary().then((dataFromApi) => {
-    setDropdownOptions(dataFromApi.data)
+  useEffect(() => {
+    getTablesSummary().then((dataFromApi) => {
+      // setDropdownOptions(dataFromApi.data);
     });
-},[])
-console.log(dropdownOptions)
+  }, []);
+  console.log(dropdownOptions);
+  console.log(dropdownOptions[filterDefinition.year][filterDefinition.scenario])
+
   useEffect(() => {
     setLoading(true);
     getData(
@@ -81,8 +84,9 @@ console.log(dropdownOptions)
             }}
             autoWidth
           >
-            <MenuItem value={"v1"}>v1</MenuItem>
-            <MenuItem value={"v2"}>v2</MenuItem>
+            {dropdownOptions[filterDefinition.year][filterDefinition.scenario].map((version) => {
+              return <MenuItem value={version}>{version}</MenuItem>;
+            })}
           </Select>
         </FormControl>
       </div>
@@ -98,16 +102,17 @@ console.log(dropdownOptions)
               let copyFilterDefinition = { ...filterDefinition };
               copyFilterDefinition.year = event.target.value;
               if (copyFilterDefinition.year === "2018") {
-                copyFilterDefinition.scenario = "";
-              } else if (copyFilterDefinition.scenario === "") {
-                copyFilterDefinition.scenario = "sc04_uzc";
+                copyFilterDefinition.scenario = "base";
+              } else {
+                copyFilterDefinition.scenario = "sc01_jam";
               }
               setFilterDefinition(copyFilterDefinition);
             }}
             autoWidth
           >
-            <MenuItem value={"2018"}>2018</MenuItem>
-            <MenuItem value={"2050"}>2050</MenuItem>
+            {Object.keys(dropdownOptions).map((year) => {
+              return <MenuItem value={year}>{year}</MenuItem>;
+            })}
           </Select>
         </FormControl>
       </div>
@@ -176,10 +181,15 @@ console.log(dropdownOptions)
               }}
               autoWidth
             >
-              <MenuItem value={"sc03_dd"}>Digitally Distributed</MenuItem>
+              {/* <MenuItem value={"sc03_dd"}>Digitally Distributed</MenuItem>
               <MenuItem value={"sc01_jam"}>Just About Managing</MenuItem>
               <MenuItem value={"sc02_pp"}>Prioritised Places</MenuItem>
-              <MenuItem value={"sc04_uzc"}>Urban Zero Carbon</MenuItem>
+              <MenuItem value={"sc04_uzc"}>Urban Zero Carbon</MenuItem> */}
+              {Object.keys(dropdownOptions[filterDefinition.year]).map(
+                (scenario) => {
+                  return <MenuItem value={scenario}>{scenario}</MenuItem>;
+                }
+              )}
             </Select>
           </FormControl>
         </div>
@@ -190,17 +200,18 @@ console.log(dropdownOptions)
           Submit
         </Button>
       ) : (
-        <Button
-          variant="contained"
-          className="submit"
-          onClick={handleSubmit}
-        >
+        <Button variant="contained" className="submit" onClick={handleSubmit}>
           Submit
         </Button>
       )}
       {loading === true && (
         <div className="loading">
-          <ReactLoading type={"spin"} color={"#00dec6"} height={50} width={50} />{" "}
+          <ReactLoading
+            type={"spin"}
+            color={"#00dec6"}
+            height={50}
+            width={50}
+          />{" "}
         </div>
       )}
       <div className="flyTo">

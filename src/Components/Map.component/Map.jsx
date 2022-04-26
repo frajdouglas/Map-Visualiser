@@ -9,7 +9,7 @@ import "./download.css";
 import Button from "@mui/material/Button";
 import Legend from "./Legend";
 import "./Map.css";
-
+import { getTablesSummary } from '../../Utils/api'
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
 
 const Map = ({
@@ -47,6 +47,7 @@ const Map = ({
   // the map.on(load) listener is async hence the next use effect will be triggered before the code in the on load function is triggered.
   // this is why we needed a separate useEffect for joining the apidata to the vector layer.
   // We add all the required sources here and add a dummy "id" layer to instantly removed in next useEffect and replace with the required layer.
+
   useEffect(() => {
     const map = new mapboxgl.Map({
       container: mapContainer.current,
