@@ -1,5 +1,5 @@
 # Map Visualiser
-A mapcentric application to explore and compare NoHAM model outputs.
+A mapcentric application to explore data from the database.
 
 Basemaps and layer geometries are supplied from Azure hosted vector tiles and served with an express.js server.
 
