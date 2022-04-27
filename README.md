@@ -1,9 +1,9 @@
-# NoHAM Outputs Visualiser
+# Map Visualiser
 A mapcentric application to explore and compare NoHAM model outputs.
 
-Basemaps and NoHAM network geometries are supplied from Azure hosted vector tiles and served with an express.js server.
+Basemaps and layer geometries are supplied from Azure hosted vector tiles and served with an express.js server.
 
-Built using React, Axios, Maplibre GL JS.
+Built using React, Axios, Mapbox GL JS.
 
 You must add a .env file after cloning the repository in order for the app to work.
 
