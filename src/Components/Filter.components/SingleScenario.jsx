@@ -40,18 +40,21 @@ const SingleScenario = () => {
     TN: [-1.826, 54.306, 8],
     M60: [-2.246, 53.473, 11],
   };
-
+  const scenarioNameLookup = {
+    sc03_dd: 'Digitally Distributed',
+    sc01_jam: 'Just About Managing',
+    sc02_pp: 'Prioritised Places',
+    sc04_uzc: 'Urban Zero Carbon'
+  }
   const handleSubmit = () => {
     setSubmittedFilterDefinition(filterDefinition);
   };
 
   useEffect(() => {
     getTablesSummary().then((dataFromApi) => {
-      // setDropdownOptions(dataFromApi.data);
+      setDropdownOptions(dataFromApi.data);
     });
   }, []);
-  console.log(dropdownOptions);
-  console.log(dropdownOptions[filterDefinition.year][filterDefinition.scenario])
 
   useEffect(() => {
     setLoading(true);
@@ -69,27 +72,6 @@ const SingleScenario = () => {
 
   return (
     <div className="filters">
-      <div className="dropdown">
-        <FormControl style={{ width: 250 }}>
-          <InputLabel id="model-filter-select-label">Model Run</InputLabel>
-          <Select
-            labelId="model-filter-dropdown"
-            id="model-filter-dropdown"
-            value={filterDefinition.model}
-            label="model"
-            onChange={(event) => {
-              let copyFilterDefinition = { ...filterDefinition };
-              copyFilterDefinition.model = event.target.value;
-              setFilterDefinition(copyFilterDefinition);
-            }}
-            autoWidth
-          >
-            {dropdownOptions[filterDefinition.year][filterDefinition.scenario].map((version) => {
-              return <MenuItem value={version}>{version}</MenuItem>;
-            })}
-          </Select>
-        </FormControl>
-      </div>
       <div className="dropdown">
         <FormControl style={{ width: 250 }}>
           <InputLabel id="year-filter-select-label">Year</InputLabel>
@@ -181,19 +163,36 @@ const SingleScenario = () => {
               }}
               autoWidth
             >
-              {/* <MenuItem value={"sc03_dd"}>Digitally Distributed</MenuItem>
-              <MenuItem value={"sc01_jam"}>Just About Managing</MenuItem>
-              <MenuItem value={"sc02_pp"}>Prioritised Places</MenuItem>
-              <MenuItem value={"sc04_uzc"}>Urban Zero Carbon</MenuItem> */}
               {Object.keys(dropdownOptions[filterDefinition.year]).map(
                 (scenario) => {
-                  return <MenuItem value={scenario}>{scenario}</MenuItem>;
+                  return <MenuItem value={scenario}>{scenarioNameLookup[scenario]}</MenuItem>;
                 }
               )}
             </Select>
           </FormControl>
         </div>
       )}
+      <div className="dropdown">
+        <FormControl style={{ width: 250 }}>
+          <InputLabel id="model-filter-select-label">Model Run</InputLabel>
+          <Select
+            labelId="model-filter-dropdown"
+            id="model-filter-dropdown"
+            value={filterDefinition.model}
+            label="model"
+            onChange={(event) => {
+              let copyFilterDefinition = { ...filterDefinition };
+              copyFilterDefinition.model = event.target.value;
+              setFilterDefinition(copyFilterDefinition);
+            }}
+            autoWidth
+          >
+            {dropdownOptions[filterDefinition.year][filterDefinition.scenario].map((version) => {
+              return <MenuItem value={version}>{version}</MenuItem>;
+            })}
+          </Select>
+        </FormControl>
+      </div>
 
       {checkEquality(submittedFilterDefinition, filterDefinition) ? (
         <Button className="submit" disabled>

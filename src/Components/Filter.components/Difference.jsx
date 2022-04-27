@@ -7,7 +7,7 @@ import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { checkEquality } from "../../Utils/objectEqualityChecker";
-import { getDifference } from "../../Utils/api.js";
+import { getDifference, getTablesSummary } from "../../Utils/api.js";
 import ReactLoading from "react-loading";
 
 const Difference = () => {
@@ -16,27 +16,30 @@ const Difference = () => {
     timePeriod: "am",
     metric: "total_flow",
     year: "2018",
-    scenario: "",
+    scenario: "base",
     model2: "v1",
     timePeriod2: "pm",
     year2: "2018",
-    scenario2: "",
+    scenario2: "base",
   });
   const [submittedFilterDefinition, setSubmittedFilterDefinition] = useState({
     model: "v1",
     timePeriod: "am",
     metric: "total_flow",
     year: "2018",
-    scenario: "",
+    scenario: "base",
     model2: "v1",
     timePeriod2: "pm",
     year2: "2018",
-    scenario2: "",
+    scenario2: "base",
   });
 
   const [apiData, setApiData] = useState([{ id: 41969, total_flow: 100 }]);
   const [loading, setLoading] = useState(false);
-
+  const [dropdownOptions, setDropdownOptions] = useState({
+    2018: { base: ["v1"] },
+    2050: { sc01_jam: ["v1"], sc02_pp: ["v1"], sc03_dd: ["v1", "v2"] },
+  });
   const [panLocation, setPanLocation] = useState("");
 
   const zoomToLookup = {
@@ -44,12 +47,24 @@ const Difference = () => {
     M60: [-2.246, 53.473, 11],
   };
 
+  const scenarioNameLookup = {
+    sc03_dd: 'Digitally Distributed',
+    sc01_jam: 'Just About Managing',
+    sc02_pp: 'Prioritised Places',
+    sc04_uzc: 'Urban Zero Carbon'
+  }
+
   let { model, timePeriod, metric, year, scenario, model2, timePeriod2, year2, scenario2 } =
     submittedFilterDefinition;
 
   const handleSubmit = () => {
     setSubmittedFilterDefinition(filterDefinition);
   };
+  useEffect(() => {
+    getTablesSummary().then((dataFromApi) => {
+      setDropdownOptions(dataFromApi.data);
+    });
+  }, []);
 
   useEffect(() => {
     setLoading(true);
@@ -73,26 +88,6 @@ const Difference = () => {
     <div className="filters">
       <div className="dropdown">
         <FormControl style={{ width: 250 }}>
-          <InputLabel id="model-filter-select-label">Model Run</InputLabel>
-          <Select
-            labelId="model-filter-dropdown"
-            id="model-filter-dropdown"
-            value={filterDefinition.model}
-            label="model"
-            onChange={(event) => {
-              let copyFilterDefinition = { ...filterDefinition };
-              copyFilterDefinition.model = event.target.value;
-              setFilterDefinition(copyFilterDefinition);
-            }}
-            autoWidth
-          >
-            <MenuItem value={"v1"}>v1</MenuItem>
-            <MenuItem value={"v2"}>v2</MenuItem>
-          </Select>
-        </FormControl>
-      </div>
-      <div className="dropdown">
-        <FormControl style={{ width: 250 }}>
           <InputLabel id="year-filter-select-label">Year</InputLabel>
           <Select
             labelId="year-filter-dropdown"
@@ -103,16 +98,17 @@ const Difference = () => {
               let copyFilterDefinition = { ...filterDefinition };
               copyFilterDefinition.year = event.target.value;
               if (copyFilterDefinition.year === "2018") {
-                copyFilterDefinition.scenario = "";
-              } else if (copyFilterDefinition.scenario === "") {
-                copyFilterDefinition.scenario = "sc04_uzc";
+                copyFilterDefinition.scenario = "base";
+              } else {
+                copyFilterDefinition.scenario = "sc01_jam";
               }
               setFilterDefinition(copyFilterDefinition);
             }}
             autoWidth
           >
-            <MenuItem value={"2018"}>2018</MenuItem>
-            <MenuItem value={"2050"}>2050</MenuItem>
+            {Object.keys(dropdownOptions).map((year) => {
+              return <MenuItem value={year}>{year}</MenuItem>;
+            })}
           </Select>
         </FormControl>
       </div>
@@ -181,31 +177,33 @@ const Difference = () => {
               }}
               autoWidth
             >
-              <MenuItem value={"sc03_dd"}>Digitally Distributed</MenuItem>
-              <MenuItem value={"sc01_jam"}>Just About Managing</MenuItem>
-              <MenuItem value={"sc02_pp"}>Prioritised Places</MenuItem>
-              <MenuItem value={"sc04_uzc"}>Urban Zero Carbon</MenuItem>
+             {Object.keys(dropdownOptions[filterDefinition.year]).map(
+                (scenario) => {
+                  return <MenuItem value={scenario}>{scenarioNameLookup[scenario]}</MenuItem>;
+                }
+              )}
             </Select>
           </FormControl>
         </div>
       )}
-      <div className="dropdown">
+            <div className="dropdown">
         <FormControl style={{ width: 250 }}>
-          <InputLabel id="model2-filter-select-label">Comparison Model Run</InputLabel>
+          <InputLabel id="model-filter-select-label">Model Run</InputLabel>
           <Select
-            labelId="model2-filter-dropdown"
-            id="model2-filter-dropdown"
-            value={filterDefinition.model2}
-            label="model2"
+            labelId="model-filter-dropdown"
+            id="model-filter-dropdown"
+            value={filterDefinition.model}
+            label="model"
             onChange={(event) => {
               let copyFilterDefinition = { ...filterDefinition };
-              copyFilterDefinition.model2 = event.target.value;
+              copyFilterDefinition.model = event.target.value;
               setFilterDefinition(copyFilterDefinition);
             }}
             autoWidth
           >
-            <MenuItem value={"v1"}>v1</MenuItem>
-            <MenuItem value={"v2"}>v2</MenuItem>
+            {dropdownOptions[filterDefinition.year][filterDefinition.scenario].map((version) => {
+              return <MenuItem value={version}>{version}</MenuItem>;
+            })}
           </Select>
         </FormControl>
       </div>
@@ -223,16 +221,17 @@ const Difference = () => {
               let copyFilterDefinition = { ...filterDefinition };
               copyFilterDefinition.year2 = event.target.value;
               if (copyFilterDefinition.year2 === "2018") {
-                copyFilterDefinition.scenario2 = "";
-              } else if (copyFilterDefinition.scenario2 === "") {
-                copyFilterDefinition.scenario2 = "sc04_uzc";
+                copyFilterDefinition.scenario2 = "base";
+              } else {
+                copyFilterDefinition.scenario2 = "sc01_jam";
               }
               setFilterDefinition(copyFilterDefinition);
             }}
             autoWidth
           >
-            <MenuItem value={"2018"}>2018</MenuItem>
-            <MenuItem value={"2050"}>2050</MenuItem>
+            {Object.keys(dropdownOptions).map((year) => {
+              return <MenuItem value={year}>{year}</MenuItem>;
+            })}
           </Select>
         </FormControl>
       </div>
@@ -277,14 +276,36 @@ const Difference = () => {
               }}
               autoWidth
             >
-              <MenuItem value={"sc03_dd"}>Digitally Distributed</MenuItem>
-              <MenuItem value={"sc01_jam"}>Just About Managing</MenuItem>
-              <MenuItem value={"sc02_pp"}>Prioritised Places</MenuItem>
-              <MenuItem value={"sc04_uzc"}>Urban Zero Carbon</MenuItem>
+             {Object.keys(dropdownOptions[filterDefinition.year]).map(
+                (scenario) => {
+                  return <MenuItem value={scenario}>{scenarioNameLookup[scenario]}</MenuItem>;
+                }
+              )}
             </Select>
           </FormControl>
         </div>
       )}
+      <div className="dropdown">
+        <FormControl style={{ width: 250 }}>
+          <InputLabel id="model2-filter-select-label">Comparison Model Run</InputLabel>
+          <Select
+            labelId="model2-filter-dropdown"
+            id="model2-filter-dropdown"
+            value={filterDefinition.model2}
+            label="model2"
+            onChange={(event) => {
+              let copyFilterDefinition = { ...filterDefinition };
+              copyFilterDefinition.model2 = event.target.value;
+              setFilterDefinition(copyFilterDefinition);
+            }}
+            autoWidth
+          >
+            {dropdownOptions[filterDefinition.year][filterDefinition.scenario].map((version) => {
+              return <MenuItem value={version}>{version}</MenuItem>;
+            })}
+          </Select>
+        </FormControl>
+      </div>
       {checkEquality(submittedFilterDefinition, filterDefinition) ? (
         <Button disabled>Submit</Button>
       ) : (
