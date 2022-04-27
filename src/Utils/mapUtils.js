@@ -1,28 +1,5 @@
-// import { Jenks } from "jenks";
-// // import { getData } from "./api.js";
-// export const jenksClassification = (apiData) => {
-//   // let timePeriod = "am"
-//   // let metric = "total_flow"
-//   // let year =  "2018"
-//   // let scenario =  ""
-//   // getData(
-//   //   timePeriod,
-//   //   metric,
-//   //   year,
-//   //   scenario
-//   // ).then((dataFromApi) => {
-//   //   console.log(dataFromApi.data)
-//     let n_classes = 5;
-//   let result = new Jenks(apiData, n_classes).naturalBreak();
-//   console.log(result);
-//   // });
-//   // let n_classes = 5;
-//   // let result = new Jenks(apiData, n_classes).naturalBreak();
-//   // console.log(result);
-//   // return result;
-// };
-
 export const colourNetwork = (
+  colourPalette,
   mapState,
   timePeriod,
   metric,
@@ -32,52 +9,32 @@ export const colourNetwork = (
   year2,
   scenario2
 ) => {
-  let paintPropertiesArraywhiteToMaroon = [
+  console.log(colourPalette);
+  let paintArray = [
     "step",
     ["feature-state", "metric"],
-    "#f7f4f9",
+    colourPalette[1],
     365,
-    "#e7e1ef",
+    colourPalette[2],
     935,
-    "#d4b9da",
+    colourPalette[3],
     1810,
-    "#c994c7",
+    colourPalette[4],
     3100,
-    "#df65b0",
+    colourPalette[5],
     4715,
-    "#e7298a",
+    colourPalette[6],
     6950,
-    "#ce1256",
+    colourPalette[7],
     10275,
-    "#980043",
+    colourPalette[8],
     15345,
-    "#67001f",
+    colourPalette[9],
     21385,
-    "#1b0008"
-    ];
-    let paintPropertiesArrayGreenToRed = [
-      "step",
-      ["feature-state", "metric"],
-      "#3FDD00",
-      365,
-      "#6CE001",
-      935,
-      "#9AE302",
-      1810,
-      "#C7E603",
-      3100,
-      "#F5E904",
-      4715,
-      "#F0BE0C",
-      6950,
-      "#EC9315",
-      10275,
-      "#E7681D",
-      15345,
-      "#E33D26",
-      21385,
-      "#DF122F"
-      ];
+    colourPalette[10],
+  ];
+
+
   let paintPropertiesArrayDifference = [
     "step",
     ["feature-state", "metric"],
@@ -101,6 +58,7 @@ export const colourNetwork = (
     10000,
     "#313695",
   ];
+
   if (metric === "total_flow" && timePeriod2) {
     paintPropertiesArrayDifference[3] = -10000;
     paintPropertiesArrayDifference[5] = -5000;
@@ -132,54 +90,34 @@ export const colourNetwork = (
       paintPropertiesArrayDifference
     );
   } else if (metric === "netspd_kph") {
-    // paintPropertiesArraywhiteToMaroon[3] = 15;
-    // paintPropertiesArraywhiteToMaroon[5] = 26;
-    // paintPropertiesArraywhiteToMaroon[7] = 37;
-    // paintPropertiesArraywhiteToMaroon[9] = 46;
-    // paintPropertiesArraywhiteToMaroon[11] = 57;
-    // paintPropertiesArraywhiteToMaroon[13] = 70;
-    // paintPropertiesArraywhiteToMaroon[15] = 84;
-    // paintPropertiesArraywhiteToMaroon[17] = 99;
-    // paintPropertiesArraywhiteToMaroon[19] = 115;
-
-    paintPropertiesArrayGreenToRed[3] = 15;
-    paintPropertiesArrayGreenToRed[5] = 26;
-    paintPropertiesArrayGreenToRed[7] = 37;
-    paintPropertiesArrayGreenToRed[9] = 46;
-    paintPropertiesArrayGreenToRed[11] = 57;
-    paintPropertiesArrayGreenToRed[13] = 70;
-    paintPropertiesArrayGreenToRed[15] = 84;
-    paintPropertiesArrayGreenToRed[17] = 99;
-    paintPropertiesArrayGreenToRed[19] = 115;
+    paintArray[3] = 15;
+    paintArray[5] = 26;
+    paintArray[7] = 37;
+    paintArray[9] = 46;
+    paintArray[11] = 57;
+    paintArray[13] = 70;
+    paintArray[15] = 84;
+    paintArray[17] = 99;
+    paintArray[19] = 115;
     return mapState.setPaintProperty(
       "id",
       "line-color",
-      paintPropertiesArrayGreenToRed
+      paintArray
     );
   } else if (metric === "total_flow") {
-    // paintPropertiesArraywhiteToMaroon[3] = 365;
-    // paintPropertiesArraywhiteToMaroon[5] = 935;
-    // paintPropertiesArraywhiteToMaroon[7] = 1810;
-    // paintPropertiesArraywhiteToMaroon[9] = 3100;
-    // paintPropertiesArraywhiteToMaroon[11] = 4715;
-    // paintPropertiesArraywhiteToMaroon[13] = 6950;
-    // paintPropertiesArraywhiteToMaroon[15] = 10275;
-    // paintPropertiesArraywhiteToMaroon[17] = 15345;
-    // paintPropertiesArraywhiteToMaroon[19] = 21385;
-
-    paintPropertiesArrayGreenToRed[3] = 365;
-    paintPropertiesArrayGreenToRed[5] = 935;
-    paintPropertiesArrayGreenToRed[7] = 1810;
-    paintPropertiesArrayGreenToRed[9] = 3100;
-    paintPropertiesArrayGreenToRed[11] = 4715;
-    paintPropertiesArrayGreenToRed[13] = 6950;
-    paintPropertiesArrayGreenToRed[15] = 10275;
-    paintPropertiesArrayGreenToRed[17] = 15345;
-    paintPropertiesArrayGreenToRed[19] = 21385;
+    paintArray[3] = 365;
+    paintArray[5] = 935;
+    paintArray[7] = 1810;
+    paintArray[9] = 3100;
+    paintArray[11] = 4715;
+    paintArray[13] = 6950;
+    paintArray[15] = 10275;
+    paintArray[17] = 15345;
+    paintArray[19] = 21385;
     return mapState.setPaintProperty(
       "id",
       "line-color",
-      paintPropertiesArrayGreenToRed
+      paintArray
     );
   }
   // mapState.setFilter("id", ['<=', 'id', 200]);

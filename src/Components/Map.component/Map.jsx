@@ -9,7 +9,7 @@ import "./download.css";
 import Button from "@mui/material/Button";
 import Legend from "./Legend";
 import "./Map.css";
-import { getTablesSummary } from '../../Utils/api'
+import { getTablesSummary } from "../../Utils/api";
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
 
 const Map = ({
@@ -32,7 +32,19 @@ const Map = ({
   const popUpRef = useRef(new mapboxgl.Popup({ offset: 20 }));
   const [mapState, setMap] = useState(null);
   const mapContainer = useRef(null);
-  const paintProperty = useRef([]);
+  const [colourPalette, setColourPalette] = useState([
+    "green",
+    "#3FDD00",
+    "#6CE001",
+    "#9AE302",
+    "#C7E603",
+    "#F5E904",
+    "#F0BE0C",
+    "#EC9315",
+    "#E7681D",
+    "#E33D26",
+    "#DF122F",
+  ]);
   const [filterBoolean, setIsFilter] = useState(true);
   // Add vector layer lookup into here once uploaded and try switching between years.
   // let sourceLayerLookup = {
@@ -51,7 +63,7 @@ const Map = ({
   useEffect(() => {
     const map = new mapboxgl.Map({
       container: mapContainer.current,
-      style: "mapbox://styles/mapbox/streets-v11",
+      style: "mapbox://styles/mapbox/light-v9",
       // style: "http://localhost:5000/style/style_dark_TEST",
       // style: "https://vector-tile-server.azurewebsites.net/style/style_light",
       // style: "https://api.os.uk/maps/vector/v1/vts?key=loCPaE9h9T3ZflTrKUqQfDyQCJBabErh",
@@ -138,6 +150,7 @@ const Map = ({
         );
       });
       colourNetwork(
+        colourPalette,
         mapState,
         timePeriod,
         metric,
@@ -147,7 +160,6 @@ const Map = ({
         year2,
         scenario2
       );
-      paintProperty.current = mapState.getPaintProperty("id", "line-color");
       mapState.on("mouseenter", "id", (e) => {
         mapState.getCanvas().style.cursor = "pointer";
         const coordinates = e.features[0].geometry.coordinates.slice();
@@ -209,6 +221,22 @@ const Map = ({
     }
   }, [filterBoolean]);
 
+  useEffect(() => {
+    if (mapState) {
+      colourNetwork(
+        colourPalette,
+        mapState,
+        timePeriod,
+        metric,
+        year,
+        scenario,
+        timePeriod2,
+        year2,
+        scenario2
+      );
+    }
+  }, [colourPalette]);
+
   return (
     <div>
       <div
@@ -221,7 +249,7 @@ const Map = ({
       </Button> */}
       <Legend
         submittedFilterDefinition={submittedFilterDefinition}
-        paintProperty={paintProperty.current}
+        colourPalette={colourPalette}
       />
       <Button
         variant="contained"
@@ -235,6 +263,46 @@ const Map = ({
         }}
       >
         Toggle Zone Connectors
+      </Button>
+      <Button
+        variant="contained"
+        className="filterButton"
+        onClick={() => {
+          if (colourPalette[0] === "pink") {
+            console.log("pink detected");
+            setColourPalette([
+              "green",
+              "#3FDD00",
+              "#6CE001",
+              "#9AE302",
+              "#C7E603",
+              "#F5E904",
+              "#F0BE0C",
+              "#EC9315",
+              "#E7681D",
+              "#E33D26",
+              "#DF122F",
+            ])
+
+          } else {
+            console.log("green detected");
+            setColourPalette([
+              "pink",
+              "#f7f4f9",
+              "#e7e1ef",
+              "#d4b9da",
+              "#c994c7",
+              "#df65b0",
+              "#e7298a",
+              "#ce1256",
+              "#980043",
+              "#67001f",
+              "#1b0008",
+            ])
+          }
+        }}
+      >
+        Toggle Colour Palette
       </Button>
     </div>
   );

@@ -1,9 +1,9 @@
 import React from "react";
 import "./Legend.css";
 
-const Legend = ({ submittedFilterDefinition, paintProperty }) => {
+const Legend = ({ submittedFilterDefinition, colourPalette }) => {
 
-  console.log(paintProperty)
+  console.log(colourPalette)
   let styleBox1 = {
     backgroundColor: "#f7f4f9",
     padding: "15px",
