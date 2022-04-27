@@ -12,6 +12,7 @@ import ReactLoading from "react-loading";
 import Legend from "../Map.component/Legend";
 
 const SingleScenario = () => {
+
   const [filterDefinition, setFilterDefinition] = useState({
     model: "v1",
     timePeriod: "am",

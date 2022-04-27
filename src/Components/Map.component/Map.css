@@ -13,12 +13,19 @@
     background-color: #00dec6;
     font-family: Arial, Helvetica, sans-serif;
     color: #00dec6;
-}
+  }
 
 .filterButton{
 position: absolute;
   top: -40vh;
-  right: -62vw;
+  right: -71vw;
   height: 5vh;
-
 }
+
+
+.colourToggleButton{
+  position: absolute;
+    top: -34vh;
+    right: -57.95vw;
+    height: 5vh;
+  }

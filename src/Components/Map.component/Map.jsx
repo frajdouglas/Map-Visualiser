@@ -253,6 +253,7 @@ const Map = ({
       />
       <Button
         variant="contained"
+        style={{ width: 250 }}
         className="filterButton"
         onClick={() => {
           if (filterBoolean) {
@@ -266,7 +267,8 @@ const Map = ({
       </Button>
       <Button
         variant="contained"
-        className="filterButton"
+        style={{ width: 250 }}
+        className="colourToggleButton"
         onClick={() => {
           if (colourPalette[0] === "pink") {
             console.log("pink detected");
@@ -282,8 +284,7 @@ const Map = ({
               "#E7681D",
               "#E33D26",
               "#DF122F",
-            ])
-
+            ]);
           } else {
             console.log("green detected");
             setColourPalette([
@@ -298,7 +299,7 @@ const Map = ({
               "#980043",
               "#67001f",
               "#1b0008",
-            ])
+            ]);
           }
         }}
       >
