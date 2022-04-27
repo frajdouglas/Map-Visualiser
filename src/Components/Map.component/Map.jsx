@@ -214,7 +214,7 @@ const Map = ({
       <div
         ref={mapContainer}
         className="MapContainer"
-        style={{ width: "85vw", height: "100vh" }}
+        style={{ width: "85vw", height: "95vh" }}
       />
       {/* <Button variant="contained" className="submitButton">
         <CSVLink data={apiData}>Download Selected</CSVLink>
