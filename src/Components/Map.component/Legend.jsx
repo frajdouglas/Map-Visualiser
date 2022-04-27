@@ -2,51 +2,50 @@ import React from "react";
 import "./Legend.css";
 
 const Legend = ({ submittedFilterDefinition, colourPalette }) => {
-
-  console.log(colourPalette)
+  console.log(colourPalette);
   let styleBox1 = {
-    backgroundColor: "#f7f4f9",
+    backgroundColor: colourPalette[1],
     padding: "15px",
   };
   let styleBox2 = {
-    backgroundColor: "#e7e1ef",
+    backgroundColor: colourPalette[2],
     padding: "15px",
   };
   let styleBox3 = {
-    backgroundColor: "#d4b9da",
+    backgroundColor: colourPalette[3],
     padding: "15px",
   };
   let styleBox4 = {
-    backgroundColor: "#c994c7",
+    backgroundColor: colourPalette[4],
     padding: "15px",
   };
   let styleBox5 = {
-    backgroundColor: "#df65b0",
+    backgroundColor: colourPalette[5],
     padding: "15px",
   };
 
   let styleBox6 = {
-    backgroundColor: "#e7298a",
+    backgroundColor: colourPalette[6],
     padding: "15px",
   };
 
   let styleBox7 = {
-    backgroundColor: "#ce1256",
+    backgroundColor: colourPalette[7],
     padding: "15px",
   };
 
   let styleBox8 = {
-    backgroundColor: "#980043",
+    backgroundColor: colourPalette[8],
     padding: "15px",
   };
 
   let styleBox9 = {
-    backgroundColor: "#67001f",
+    backgroundColor: colourPalette[9],
     padding: "15px",
   };
 
   let styleBox10 = {
-    backgroundColor: "#1b0008",
+    backgroundColor: colourPalette[10],
     padding: "15px",
   };
 
@@ -62,26 +61,54 @@ const Legend = ({ submittedFilterDefinition, colourPalette }) => {
       <div className="legend">
         <div className="legendTitle">Net Speed Difference (kph)</div>
         <div className="legendRow">
-          <div className="legendValue">-20</div>
+          <div className="legendValue">-50</div>
           <div style={styleBox1}></div>
         </div>
         <div className="legendRow">
-          <div className="legendValue">-10</div>
+          <div className="legendValue">-35 to -15</div>
           <div style={styleBox2}></div>
         </div>
         <div className="legendRow">
-          <div className="legendValue">0</div>
-          <div
-            style={styleBoxGrey}
-          ></div>
+          <div className="legendValue">-35 to -15</div>
+          <div style={styleBox3}></div>
         </div>
         <div className="legendRow">
-          <div className="legendValue">10</div>
+          <div className="legendValue">-15 to -5</div>
           <div style={styleBox4}></div>
         </div>
         <div className="legendRow">
-          <div className="legendValue">20</div>
-          <div style={styleBox5}></div>
+          <div className="legendValue">-5 to 0</div>
+          <div
+            style={{
+              backgroundColor: "#FFFFFF",
+              padding: "15px",
+            }}
+          ></div>
+        </div>
+        <div className="legendRow">
+          <div className="legendValue">0 to 5</div>
+          <div
+            style={{
+              backgroundColor: "#FFFFFF",
+              padding: "15px",
+            }}
+          ></div>
+        </div>
+        <div className="legendRow">
+          <div className="legendValue">5 to 15</div>
+          <div style={styleBox7}></div>
+        </div>
+        <div className="legendRow">
+          <div className="legendValue">15 to 35</div>
+          <div style={styleBox8}></div>
+        </div>
+        <div className="legendRow">
+          <div className="legendValue">35 to 50</div>
+          <div style={styleBox9}></div>
+        </div>
+        <div className="legendRow">
+          <div className="legendValue">50+</div>
+          <div style={styleBox10}></div>
         </div>
       </div>
     );
@@ -95,24 +122,54 @@ const Legend = ({ submittedFilterDefinition, colourPalette }) => {
           {submittedFilterDefinition.metric} Difference{" "}
         </div>
         <div className="legendRow">
-          <div className="legendValue">-1000</div>
+          <div className="legendValue">-10000</div>
           <div style={styleBox1}></div>
         </div>
         <div className="legendRow">
-          <div className="legendValue">-500</div>
+          <div className="legendValue">-10000 to -5000</div>
           <div style={styleBox2}></div>
         </div>
         <div className="legendRow">
-          <div className="legendValue">0</div>
-          <div style={styleBoxGrey}></div>
+          <div className="legendValue">-5000 to -1000</div>
+          <div style={styleBox3}></div>
         </div>
         <div className="legendRow">
-          <div className="legendValue">500</div>
+          <div className="legendValue">-1000 to -100</div>
           <div style={styleBox4}></div>
         </div>
         <div className="legendRow">
-          <div className="legendValue">1000</div>
-          <div style={styleBox5}></div>
+          <div className="legendValue">-100 to 0</div>
+          <div
+            style={{
+              backgroundColor: "#FFFFFF",
+              padding: "15px",
+            }}
+          ></div>
+        </div>
+        <div className="legendRow">
+          <div className="legendValue">0 to 100</div>
+          <div
+            style={{
+              backgroundColor: "#FFFFFF",
+              padding: "15px",
+            }}
+          ></div>
+        </div>
+        <div className="legendRow">
+          <div className="legendValue">100 to 1000</div>
+          <div style={styleBox7}></div>
+        </div>
+        <div className="legendRow">
+          <div className="legendValue">1000 to 5000</div>
+          <div style={styleBox8}></div>
+        </div>
+        <div className="legendRow">
+          <div className="legendValue">5000 to 10000</div>
+          <div style={styleBox9}></div>
+        </div>
+        <div className="legendRow">
+          <div className="legendValue">10000+</div>
+          <div style={styleBox10}></div>
         </div>
       </div>
     );

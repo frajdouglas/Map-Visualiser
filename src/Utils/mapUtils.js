@@ -35,59 +35,59 @@ export const colourNetwork = (
   ];
 
 
-  let paintPropertiesArrayDifference = [
+  let paintArrayDifference = [
     "step",
     ["feature-state", "metric"],
-    "#a50026",
+    colourPalette[1],
     -10000,
-    "#d73027",
+    colourPalette[2],
     -5000,
-    "#f46d43",
+    colourPalette[3],
     -1000,
-    "#fdae61",
+    colourPalette[4],
     -100,
-    "#fee090",
+    '#FFFFFF',
     0,
-    "#e0f3f8",
+    '#FFFFFF',
     100,
-    "#abd9e9",
+    colourPalette[7],
     1000,
-    "#74add1",
+    colourPalette[8],
     5000,
-    "#4575b4",
+    colourPalette[9],
     10000,
-    "#313695",
+    colourPalette[10],
   ];
 
   if (metric === "total_flow" && timePeriod2) {
-    paintPropertiesArrayDifference[3] = -10000;
-    paintPropertiesArrayDifference[5] = -5000;
-    paintPropertiesArrayDifference[7] = -1000;
-    paintPropertiesArrayDifference[9] = -100;
-    paintPropertiesArrayDifference[11] = 0;
-    paintPropertiesArrayDifference[13] = 100;
-    paintPropertiesArrayDifference[15] = 1000;
-    paintPropertiesArrayDifference[17] = 5000;
-    paintPropertiesArrayDifference[19] = 10000;
+    paintArrayDifference[3] = -10000;
+    paintArrayDifference[5] = -5000;
+    paintArrayDifference[7] = -1000;
+    paintArrayDifference[9] = -100;
+    paintArrayDifference[11] = 0;
+    paintArrayDifference[13] = 100;
+    paintArrayDifference[15] = 1000;
+    paintArrayDifference[17] = 5000;
+    paintArrayDifference[19] = 10000;
     return mapState.setPaintProperty(
       "id",
       "line-color",
-      paintPropertiesArrayDifference
+      paintArrayDifference
     );
   } else if (metric === "netspd_kph" && timePeriod2) {
-    paintPropertiesArrayDifference[3] = -100;
-    paintPropertiesArrayDifference[5] = -40;
-    paintPropertiesArrayDifference[7] = -15;
-    paintPropertiesArrayDifference[9] = -4;
-    paintPropertiesArrayDifference[11] = 0;
-    paintPropertiesArrayDifference[13] = 4;
-    paintPropertiesArrayDifference[15] = 15;
-    paintPropertiesArrayDifference[17] = 40;
-    paintPropertiesArrayDifference[19] = 100;
+    paintArrayDifference[3] = -50;
+    paintArrayDifference[5] = -35;
+    paintArrayDifference[7] = -15;
+    paintArrayDifference[9] = -5;
+    paintArrayDifference[11] = 0;
+    paintArrayDifference[13] = 5;
+    paintArrayDifference[15] = 15;
+    paintArrayDifference[17] = 35;
+    paintArrayDifference[19] = 50;
     return mapState.setPaintProperty(
       "id",
       "line-color",
-      paintPropertiesArrayDifference
+      paintArrayDifference
     );
   } else if (metric === "netspd_kph") {
     paintArray[3] = 15;
