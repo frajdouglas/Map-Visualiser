@@ -9,7 +9,6 @@ import MenuItem from "@mui/material/MenuItem";
 import { checkEquality } from "../../Utils/objectEqualityChecker";
 import { getData, getTablesSummary } from "../../Utils/api.js";
 import ReactLoading from "react-loading";
-import Legend from "../Map.component/Legend";
 
 const SingleScenario = () => {
 
@@ -241,7 +240,6 @@ const SingleScenario = () => {
           zoomToLookup={zoomToLookup}
         />
       </div>
-      {/* <Legend submittedFilterDefinition={submittedFilterDefinition}/> */}
     </div>
   );
 };

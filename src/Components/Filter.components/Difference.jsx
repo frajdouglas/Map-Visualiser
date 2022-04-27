@@ -276,9 +276,9 @@ const Difference = () => {
               }}
               autoWidth
             >
-             {Object.keys(dropdownOptions[filterDefinition.year]).map(
-                (scenario) => {
-                  return <MenuItem value={scenario}>{scenarioNameLookup[scenario]}</MenuItem>;
+             {Object.keys(dropdownOptions[filterDefinition.year2]).map(
+                (scenario2) => {
+                  return <MenuItem value={scenario2}>{scenarioNameLookup[scenario2]}</MenuItem>;
                 }
               )}
             </Select>

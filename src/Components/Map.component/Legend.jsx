@@ -49,10 +49,6 @@ const Legend = ({ submittedFilterDefinition, colourPalette }) => {
     padding: "15px",
   };
 
-  let styleBoxGrey = {
-    backgroundColor: "#f0f5f1",
-    padding: "15px",
-  };
   if (
     submittedFilterDefinition.metric === "netspd_kph" &&
     submittedFilterDefinition.timePeriod2

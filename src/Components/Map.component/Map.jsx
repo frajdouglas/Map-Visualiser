@@ -4,12 +4,12 @@ import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import Popup from "../Popup.component/Popup";
 import { colourNetwork } from "../../Utils/mapUtils.js";
-import { CSVLink } from "react-csv";
+// import { CSVLink } from "react-csv";
 import "./download.css";
 import Button from "@mui/material/Button";
 import Legend from "./Legend";
 import "./Map.css";
-import { getTablesSummary } from "../../Utils/api";
+
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
 
 const Map = ({
@@ -19,12 +19,10 @@ const Map = ({
   zoomToLookup,
 }) => {
   let {
-    model,
     timePeriod,
     metric,
     year,
     scenario,
-    model2,
     timePeriod2,
     year2,
     scenario2,
@@ -108,6 +106,9 @@ const Map = ({
     if (mapState) {
       if (typeof mapState.getLayer("id") !== "undefined") {
         mapState.removeLayer("id");
+      }
+      if (typeof mapState.getLayer("halo") !== "undefined") {
+        mapState.removeLayer("halo");
       }
       mapState.addLayer({
         id: "halo",
