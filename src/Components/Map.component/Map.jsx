@@ -243,7 +243,7 @@ const Map = ({
       <div
         ref={mapContainer}
         className="MapContainer"
-        style={{ width: "85vw", height: "95vh" }}
+        style={{ width: "85vw", height: "96vh" }}
       />
       {/* <Button variant="contained" className="submitButton">
         <CSVLink data={apiData}>Download Selected</CSVLink>
@@ -272,7 +272,6 @@ const Map = ({
         className="colourToggleButton"
         onClick={() => {
           if (colourPalette[0] === "pink") {
-            console.log("pink detected");
             setColourPalette([
               "green",
               "#3FDD00",
@@ -287,7 +286,6 @@ const Map = ({
               "#DF122F",
             ]);
           } else {
-            console.log("green detected");
             setColourPalette([
               "pink",
               "#f7f4f9",

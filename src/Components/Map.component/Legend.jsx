@@ -2,7 +2,6 @@ import React from "react";
 import "./Legend.css";
 
 const Legend = ({ submittedFilterDefinition, colourPalette }) => {
-  console.log(colourPalette);
   let styleBox1 = {
     backgroundColor: colourPalette[1],
     padding: "15px",
@@ -271,19 +270,19 @@ const Legend = ({ submittedFilterDefinition, colourPalette }) => {
         </div>
         <div className="legendRow">
           <div className="legendValue">250-760</div>
-          <div style={styleBox2}></div>
-        </div>
-        <div className="legendRow">
-          <div className="legendValue">760-1600</div>
           <div style={styleBox3}></div>
         </div>
         <div className="legendRow">
+          <div className="legendValue">760-1600</div>
+          <div style={styleBox5}></div>
+        </div>
+        <div className="legendRow">
           <div className="legendValue">1600-3000</div>
-          <div style={styleBox4}></div>
+          <div style={styleBox7}></div>
         </div>
         <div className="legendRow">
           <div className="legendValue">3000-8200</div>
-          <div style={styleBox5}></div>
+          <div style={styleBox9}></div>
         </div>
       </div>
     );
@@ -297,19 +296,19 @@ const Legend = ({ submittedFilterDefinition, colourPalette }) => {
         </div>
         <div className="legendRow">
           <div className="legendValue">600-2000</div>
-          <div style={styleBox2}></div>
-        </div>
-        <div className="legendRow">
-          <div className="legendValue">2000-4580</div>
           <div style={styleBox3}></div>
         </div>
         <div className="legendRow">
+          <div className="legendValue">2000-4580</div>
+          <div style={styleBox5}></div>
+        </div>
+        <div className="legendRow">
           <div className="legendValue">4580-12000</div>
-          <div style={styleBox4}></div>
+          <div style={styleBox7}></div>
         </div>
         <div className="legendRow">
           <div className="legendValue">12000-24000</div>
-          <div style={styleBox5}></div>
+          <div style={styleBox9}></div>
         </div>
       </div>
     );
@@ -323,19 +322,19 @@ const Legend = ({ submittedFilterDefinition, colourPalette }) => {
         </div>
         <div className="legendRow">
           <div className="legendValue">500-1600</div>
-          <div style={styleBox2}></div>
-        </div>
-        <div className="legendRow">
-          <div className="legendValue">1600-4400</div>
           <div style={styleBox3}></div>
         </div>
         <div className="legendRow">
+          <div className="legendValue">1600-4400</div>
+          <div style={styleBox5}></div>
+        </div>
+        <div className="legendRow">
           <div className="legendValue">4400-10500</div>
-          <div style={styleBox4}></div>
+          <div style={styleBox7}></div>
         </div>
         <div className="legendRow">
           <div className="legendValue">10500-20000</div>
-          <div style={styleBox5}></div>
+          <div style={styleBox9}></div>
         </div>
       </div>
     );
@@ -349,19 +348,19 @@ const Legend = ({ submittedFilterDefinition, colourPalette }) => {
         </div>
         <div className="legendRow">
           <div className="legendValue">70-210</div>
-          <div style={styleBox2}></div>
-        </div>
-        <div className="legendRow">
-          <div className="legendValue">210-480</div>
           <div style={styleBox3}></div>
         </div>
         <div className="legendRow">
+          <div className="legendValue">210-480</div>
+          <div style={styleBox5}></div>
+        </div>
+        <div className="legendRow">
           <div className="legendValue">480-900</div>
-          <div style={styleBox4}></div>
+          <div style={styleBox7}></div>
         </div>
         <div className="legendRow">
           <div className="legendValue">900-1800</div>
-          <div style={styleBox5}></div>
+          <div style={styleBox9}></div>
         </div>
       </div>
     );
@@ -375,19 +374,19 @@ const Legend = ({ submittedFilterDefinition, colourPalette }) => {
         </div>
         <div className="legendRow">
           <div className="legendValue">125-415</div>
-          <div style={styleBox2}></div>
-        </div>
-        <div className="legendRow">
-          <div className="legendValue">415-950</div>
           <div style={styleBox3}></div>
         </div>
         <div className="legendRow">
+          <div className="legendValue">415-950</div>
+          <div style={styleBox5}></div>
+        </div>
+        <div className="legendRow">
           <div className="legendValue">950-1800</div>
-          <div style={styleBox4}></div>
+          <div style={styleBox7}></div>
         </div>
         <div className="legendRow">
           <div className="legendValue">1800-3120</div>
-          <div style={styleBox5}></div>
+          <div style={styleBox9}></div>
         </div>
       </div>
     );
@@ -401,19 +400,19 @@ const Legend = ({ submittedFilterDefinition, colourPalette }) => {
         </div>
         <div className="legendRow">
           <div className="legendValue">13-35</div>
-          <div style={styleBox2}></div>
-        </div>
-        <div className="legendRow">
-          <div className="legendValue">35-58</div>
           <div style={styleBox3}></div>
         </div>
         <div className="legendRow">
+          <div className="legendValue">35-58</div>
+          <div style={styleBox5}></div>
+        </div>
+        <div className="legendRow">
           <div className="legendValue">58-86</div>
-          <div style={styleBox4}></div>
+          <div style={styleBox7}></div>
         </div>
         <div className="legendRow">
           <div className="legendValue">86-205</div>
-          <div style={styleBox5}></div>
+          <div style={styleBox9}></div>
         </div>
       </div>
     );

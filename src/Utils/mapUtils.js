@@ -9,7 +9,6 @@ export const colourNetwork = (
   year2,
   scenario2
 ) => {
-  console.log(colourPalette);
   let paintArray = [
     "step",
     ["feature-state", "metric"],
@@ -34,7 +33,6 @@ export const colourNetwork = (
     colourPalette[10],
   ];
 
-
   let paintArrayDifference = [
     "step",
     ["feature-state", "metric"],
@@ -46,9 +44,9 @@ export const colourNetwork = (
     -1000,
     colourPalette[4],
     -100,
-    '#FFFFFF',
+    "#FFFFFF",
     0,
-    '#FFFFFF',
+    "#FFFFFF",
     100,
     colourPalette[7],
     1000,
@@ -69,11 +67,7 @@ export const colourNetwork = (
     paintArrayDifference[15] = 1000;
     paintArrayDifference[17] = 5000;
     paintArrayDifference[19] = 10000;
-    return mapState.setPaintProperty(
-      "id",
-      "line-color",
-      paintArrayDifference
-    );
+    return mapState.setPaintProperty("id", "line-color", paintArrayDifference);
   } else if (metric === "netspd_kph" && timePeriod2) {
     paintArrayDifference[3] = -50;
     paintArrayDifference[5] = -35;
@@ -84,11 +78,7 @@ export const colourNetwork = (
     paintArrayDifference[15] = 15;
     paintArrayDifference[17] = 35;
     paintArrayDifference[19] = 50;
-    return mapState.setPaintProperty(
-      "id",
-      "line-color",
-      paintArrayDifference
-    );
+    return mapState.setPaintProperty("id", "line-color", paintArrayDifference);
   } else if (metric === "netspd_kph") {
     paintArray[3] = 15;
     paintArray[5] = 26;
@@ -99,11 +89,7 @@ export const colourNetwork = (
     paintArray[15] = 84;
     paintArray[17] = 99;
     paintArray[19] = 115;
-    return mapState.setPaintProperty(
-      "id",
-      "line-color",
-      paintArray
-    );
+    return mapState.setPaintProperty("id", "line-color", paintArray);
   } else if (metric === "total_flow") {
     paintArray[3] = 365;
     paintArray[5] = 935;
@@ -114,122 +100,73 @@ export const colourNetwork = (
     paintArray[15] = 10275;
     paintArray[17] = 15345;
     paintArray[19] = 21385;
+    return mapState.setPaintProperty("id", "line-color", paintArray);
+  } else if (metric === "car_eb") {
+    paintArray[3] = 0;
+    paintArray[7] = 250;
+    paintArray[11] = 760;
+    paintArray[15] = 1600;
+    paintArray[19] = 3000;
     return mapState.setPaintProperty(
       "id",
       "line-color",
       paintArray
     );
+  } else if (metric === "car_comm") {
+    paintArray[3] = 0;
+    paintArray[7] = 600;
+    paintArray[11] = 2000;
+    paintArray[15] = 4580;
+    paintArray[19] = 12000;
+    return mapState.setPaintProperty(
+      "id",
+      "line-color",
+      paintArray
+    );
+  } else if (metric === "car_other") {
+    paintArray[3] = 0;
+    paintArray[7] = 500;
+    paintArray[11] = 1600;
+    paintArray[15] = 4400;
+    paintArray[19] = 10500;
+    return mapState.setPaintProperty(
+      "id",
+      "line-color",
+      paintArray
+    );
+  } else if (metric === "lgv_flow") {
+    paintArray[3] = 0;
+    paintArray[7] = 70;
+    paintArray[11] = 210;
+    paintArray[15] = 480;
+    paintArray[19] = 900;
+    return mapState.setPaintProperty(
+      "id",
+      "line-color",
+      paintArray
+    );
+  } else if (metric === "hgv_flow") {
+    paintArray[3] = 0;
+    paintArray[7] = 125;
+    paintArray[11] = 415;
+    paintArray[15] = 950;
+    paintArray[19] = 1800;
+    return mapState.setPaintProperty(
+      "id",
+      "line-color",
+      paintArray
+    );
+  } else if (metric === "link_voc") {
+    paintArray[3] = 0;
+    paintArray[7] = 13;
+    paintArray[11] = 35;
+    paintArray[15] = 58;
+    paintArray[19] = 86;
+    return mapState.setPaintProperty(
+      "id",
+      "line-color",
+      paintArray
+    );
+  } else {
   }
-  // mapState.setFilter("id", ['<=', 'id', 200]);
-  // mapState.setFilter("id", ['<=', 'feature-state', 200]);
-
-  // mapState.setFilter("id", [">=", ["get", "feature-state"],1]);
-  // // mapState.setLayoutProperty('id', 'visibility', ["get", "feature-state"],2);
-  // mapState.setLayoutProperty('halo', 'visibility', "none");
-
-  //  if (metric === "netspd_kph" && timePeriod2) {
-  //   paintPropertiesArrayRedToGreyToGreen[3] = -20;
-  //   paintPropertiesArrayRedToGreyToGreen[5] = -10;
-  //   paintPropertiesArrayRedToGreyToGreen[7] = 0;
-  //   paintPropertiesArrayRedToGreyToGreen[9] = 10;
-  //   paintPropertiesArrayRedToGreyToGreen[11] = 20;
-  //     return mapState.setPaintProperty(
-  //       "id",
-  //       "line-color",
-  //       paintPropertiesArrayRedToGreyToGreen
-  //     );
-  //   }
 };
-//   } else if (metric === "total_flow") {
-//     paintPropertiesArrayGreenToRed[3] = 0;
-//     paintPropertiesArrayGreenToRed[5] = 900;
-//     paintPropertiesArrayGreenToRed[7] = 2800;
-//     paintPropertiesArrayGreenToRed[9] = 6400;
-//     paintPropertiesArrayGreenToRed[11] = 16000;
-
-//     return mapState.setPaintProperty(
-//       "id",
-//       "line-color",
-//       paintPropertiesArrayGreenToRed
-//     );
-//   } else if (metric === "netspd_kph") {
-//     paintPropertiesArrayRedToGreen[3] = 0;
-//     paintPropertiesArrayRedToGreen[5] = 30;
-//     paintPropertiesArrayRedToGreen[7] = 55;
-//     paintPropertiesArrayRedToGreen[9] = 82;
-//     paintPropertiesArrayRedToGreen[11] = 113;
-//     return mapState.setPaintProperty(
-//       "id",
-//       "line-color",
-//       paintPropertiesArrayRedToGreen
-//     );
-//   } else if (metric === "car_eb") {
-//     paintPropertiesArrayGreenToRed[3] = 0;
-//     paintPropertiesArrayGreenToRed[5] = 250;
-//     paintPropertiesArrayGreenToRed[7] = 760;
-//     paintPropertiesArrayGreenToRed[9] = 1600;
-//     paintPropertiesArrayGreenToRed[11] = 3000;
-//     return mapState.setPaintProperty(
-//       "id",
-//       "line-color",
-//       paintPropertiesArrayGreenToRed
-//     );
-//   } else if (metric === "car_comm") {
-//     paintPropertiesArrayGreenToRed[3] = 0;
-//     paintPropertiesArrayGreenToRed[5] = 600;
-//     paintPropertiesArrayGreenToRed[7] = 2000;
-//     paintPropertiesArrayGreenToRed[9] = 4580;
-//     paintPropertiesArrayGreenToRed[11] = 12000;
-//     return mapState.setPaintProperty(
-//       "id",
-//       "line-color",
-//       paintPropertiesArrayGreenToRed
-//     );
-//   } else if (metric === "car_other") {
-//     paintPropertiesArrayGreenToRed[3] = 0;
-//     paintPropertiesArrayGreenToRed[5] = 500;
-//     paintPropertiesArrayGreenToRed[7] = 1600;
-//     paintPropertiesArrayGreenToRed[9] = 4400;
-//     paintPropertiesArrayGreenToRed[11] = 10500;
-//     return mapState.setPaintProperty(
-//       "id",
-//       "line-color",
-//       paintPropertiesArrayGreenToRed
-//     );
-//   } else if (metric === "lgv_flow") {
-//     paintPropertiesArrayGreenToRed[3] = 0;
-//     paintPropertiesArrayGreenToRed[5] = 70;
-//     paintPropertiesArrayGreenToRed[7] = 210;
-//     paintPropertiesArrayGreenToRed[9] = 480;
-//     paintPropertiesArrayGreenToRed[11] = 900;
-//     return mapState.setPaintProperty(
-//       "id",
-//       "line-color",
-//       paintPropertiesArrayGreenToRed
-//     );
-//   } else if (metric === "hgv_flow") {
-//     paintPropertiesArrayGreenToRed[3] = 0;
-//     paintPropertiesArrayGreenToRed[5] = 125;
-//     paintPropertiesArrayGreenToRed[7] = 415;
-//     paintPropertiesArrayGreenToRed[9] = 950;
-//     paintPropertiesArrayGreenToRed[11] = 1800;
-//     return mapState.setPaintProperty(
-//       "id",
-//       "line-color",
-//       paintPropertiesArrayGreenToRed
-//     );
-//   } else if (metric === "link_voc") {
-//     paintPropertiesArrayGreenToRed[3] = 0;
-//     paintPropertiesArrayGreenToRed[5] = 13;
-//     paintPropertiesArrayGreenToRed[7] = 35;
-//     paintPropertiesArrayGreenToRed[9] = 58;
-//     paintPropertiesArrayGreenToRed[11] = 86;
-//     return mapState.setPaintProperty(
-//       "id",
-//       "line-color",
-//       paintPropertiesArrayGreenToRed
-//     );
-//   } else {
-//     console.log("NOTHING TRIGGERED");
-//   }
-// };

@@ -10,21 +10,18 @@ const postgresApi = axios.create({
 
 export const getData = (model, timePeriod, metric, year, scenario) => {
   return postgresApi.get('/', { params: { model : model, timePeriod : timePeriod, metric : metric, year : year, scenario : scenario }}).then((res) => {
-    console.log(res)
     return res.data;
   });
 };
 
 export const getDifference = (model, timePeriod, metric, year, scenario, model2, timePeriod2, year2, scenario2) => {
   return postgresApi.get('/difference', { params: { model : model, timePeriod : timePeriod, metric : metric, year : year, scenario: scenario, model2 : model2, timePeriod2 : timePeriod2, year2 : year2, scenario2 : scenario2 }}).then((res) => {
-    console.log(res.data)
     return res.data;
   });
 };
 
 export const getTablesSummary = () => {
   return postgresApi.get('/summary').then((res) => {
-    console.log(res.data)
     return res.data;
   });
 };
